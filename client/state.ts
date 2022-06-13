@@ -72,7 +72,7 @@ const mainState = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Autorization: `${token.id}`,
+        Authorization: `bearer ${token.id}`,
       },
       body: JSON.stringify(data),
     });
@@ -82,17 +82,15 @@ const mainState = {
     return dataForm;
   },
   async myData() {
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
+    console.log("token", token);
     const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        Autorization: `${token}`,
+        Authorization: `bearer ${token}`,
       },
     });
-
     const dataForm = await sendFormData.json();
-    console.log("mydata", dataForm);
     return dataForm;
   },
 

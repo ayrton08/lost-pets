@@ -29,7 +29,7 @@ router.post("/signin", async (req, res) => {
 });
 
 router.get("/my-data", authController.authMiddleware, async (req, res) => {
-  const id = Number(req["_user"].id);
+  const id = req["_user"]["user"].id;
   const user = await User.findByPk(id);
   res.json(user);
 });
