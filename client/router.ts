@@ -4,6 +4,8 @@ import { reportPage } from "./pages/view-report-pet";
 import { welcomePage } from "./pages/welcome";
 import { loginPage } from "./pages/login";
 import { doReportPet } from "./pages/report-Pet";
+import { myReportsPage } from "./pages/my-reports";
+import { myDataPage } from "./pages/my-data";
 
 const routes = [
   {
@@ -29,6 +31,14 @@ const routes = [
   {
     path: /\/do-report/,
     component: doReportPet,
+  },
+  {
+    path: /\/my-reports/,
+    component: myReportsPage,
+  },
+  {
+    path: /\/my-data/,
+    component: myDataPage,
   },
 ];
 

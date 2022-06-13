@@ -2,12 +2,14 @@ import * as express from "express";
 import { index } from "../lib/algolia";
 import { Pets } from "../models";
 import { PetsController } from "../controllers/pets-controllers";
-const petsCrontroller = new PetsController();
+import { AuthController } from "../controllers/auth-controllers";
+const authControllers = new AuthController();
+const petsController = new PetsController();
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const allPets = await petsCrontroller.findAllPets();
+    const allPets = await petsController.findAllPets();
     res.json(allPets);
   } catch (error) {
     next(error);
@@ -17,31 +19,43 @@ router.get("/", async (req, res, next) => {
 router.get("/find-by-location", async (req, res, next) => {
   const { lat, lng } = req.query;
   try {
-    const rta = await petsCrontroller.findClose(lat, lng);
+    const rta = await petsController.findClose(lat, lng);
     res.json(rta);
   } catch (error) {
     next(error);
   }
 });
 
-router.post("/report-pet", async (req, res, next) => {
-  try {
-    const newPet = await petsCrontroller.reportLostPet(req.body);
-    const id = newPet["id"];
-    const { name, state, lat, lng } = req.body;
-    const algolia = await petsCrontroller.updateReportAlgolia(
-      id,
-      name,
-      state,
-      lat,
-      lng
-    );
+router.post(
+  "/report-pet",
+  authControllers.authMiddleware,
+  async (req, res, next) => {
+    const userId = req["_user"].id;
 
-    return res.json(newPet);
-  } catch (error) {
-    next(error);
+    try {
+      const newPetData = {
+        ...req.body,
+        UserId: userId,
+      };
+      const newPet = await petsController.reportLostPet(newPetData);
+
+      const id = newPet["id"];
+      const { name, state, lat, lng } = req.body;
+      const algolia = await petsController.updateReportAlgolia(
+        id,
+        name,
+        state,
+        lat,
+        lng,
+        userId
+      );
+
+      return res.json(newPet);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.patch("/update/:id", async (req, res) => {
   const { id } = req.params;
@@ -50,7 +64,7 @@ router.patch("/update/:id", async (req, res) => {
       id: id,
     },
   });
-  const indexItem = petsCrontroller.bodyToIndex(req.body, id);
+  const indexItem = petsController.bodyToIndex(req.body, id);
   const algoliaRes = await index.partialUpdateObject(indexItem);
   res.json(pet);
 });

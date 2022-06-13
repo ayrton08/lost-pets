@@ -9,7 +9,7 @@ export class PetsController {
       const newPet = await Pets.create(params);
       return newPet;
     } catch (error) {
-      return new Error("No pudimos crear el report de la pet")
+      return new Error("No pudimos crear el report de la pet");
     }
   }
 
@@ -18,7 +18,7 @@ export class PetsController {
       const allPets = await Pets.findAll();
       return allPets;
     } catch (error) {
-      return new Error("No pudimos encontrar todos los pets reportados")
+      return new Error("No pudimos encontrar todos los pets reportados");
     }
   }
 
@@ -30,7 +30,7 @@ export class PetsController {
     return hits;
   }
 
-  async updateReportAlgolia(id, name, state, lat, lng) {
+  async updateReportAlgolia(id, name, state, lat, lng, UserId) {
     const algoliaRes = await index.saveObject({
       objectID: id,
       name: name,
@@ -39,13 +39,14 @@ export class PetsController {
         lat: lat,
         lng: lng,
       },
+      UserId,
     });
     return algoliaRes;
   }
 
   bodyToIndex(body, id?) {
-    if(!body.lat || !body.lng || !body.name || !body.state  ){
-      return new Error("Faltan parametros")
+    if (!body.lat || !body.lng || !body.name || !body.state) {
+      return new Error("Faltan parametros");
     }
     const rta: any = {};
     if (body.name) {
@@ -53,6 +54,9 @@ export class PetsController {
     }
     if (body.state) {
       rta.state = body.state;
+    }
+    if (body.UserId) {
+      rta.UserId = body.UserId;
     }
     if (body.lat && body.lng) {
       rta._geoloc = {

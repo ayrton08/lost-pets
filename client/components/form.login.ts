@@ -54,14 +54,15 @@ export function formLogin() {
         const email = e.target["email"].value;
         const password = e.target["password"].value;
         const login = await mainState.login(email, password);
-
+        
         if (state.myData.login) {
           try {
             valid["style"].color = "green";
             valid.textContent = "Login exitoso ✅";
             mainState.setToken(login);
-            const token = JSON.parse(localStorage.getItem("token"));
-            console.log("token", token);
+
+            // const token = JSON.parse(localStorage.getItem("token"));
+            // console.log("token", token);
 
             // const data = jwt.verify(token, "estoesunsecreto");
             // console.log("data", data);

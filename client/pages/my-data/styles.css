@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+.title-find-pets {
+  font-size: 40px;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+}
+.content-home {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px 0px 50px;
+  text-align: center;
+  gap: 20px;
+  background-color: #2ecc71;
+  height: 100vh;
+}
+
+.pets-card {
+  border: solid 2px;
+  border-radius: 5px;
+  margin: 20px 50px;
+  background-color: #D2B4DE;
+}

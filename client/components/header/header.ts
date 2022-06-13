@@ -73,7 +73,7 @@ export function header() {
         <button class="modal-close">❌</button>
           
           <span>Mis Datos</span>
-          <span>Mis Mascotas Reportadas</span>
+          <span class="my-reports">Mis Mascotas Reportadas</span>
           <span class="do-report">Reportar Mascota</span>
           
           <div class="menu-footer">
@@ -109,6 +109,10 @@ export function header() {
       const doReport = this.shadowRoot.querySelector(".do-report");
       doReport.addEventListener("click", () => {
         location.pathname = "do-report";
+      });
+      const myReports = this.shadowRoot.querySelector(".my-reports");
+      myReports.addEventListener("click", () => {
+        location.pathname = "my-reports";
       });
     }
     getStyles() {

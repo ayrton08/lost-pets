@@ -2,6 +2,7 @@ import * as crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 import { Auth } from "../models/auth";
 import { config } from "../config";
+import { User } from "../models";
 const secret = config.secretValidator;
 
 export class AuthController {
@@ -18,7 +19,7 @@ export class AuthController {
       req["_user"] = data;
       next();
     } catch (error) {
-      res.status(401).json({ error: "el secret es invalido" });
+      res.status(401).json(error);
     }
   }
 
@@ -30,10 +31,12 @@ export class AuthController {
         password: passwordHash,
       },
     });
+    const id = Number(auth.get("user_id"));
+    const user = await User.findByPk(id);
     if (!auth) {
       throw new Error("contraseña incorrecta");
     }
-    const token = jwt.sign({ id: auth.get("user_id") }, "estoesunsecreto");
+    const token = jwt.sign({ user }, "estoesunsecreto");
     return token;
   }
 

@@ -22,20 +22,26 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.patch("/update/:id", async (req, res) => {
-  const { id } = req.params;
+router.patch("/update", authController.authMiddleware, async (req, res) => {
+  const { id } = req["_user"];
+  if (!id) {
+    return res.json({ error: "Falta el userId" });
+  }
   const user = await User.update(req.body, {
     where: {
       id: id,
     },
   });
-  res.json(user);
+  return res.json(user);
 });
 
-//login
-// router.get("/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const user = await userController.loginUser(id);
-//   res.json(user);
-// });
+router.get("/my-pets", authController.authMiddleware, async (req, res) => {
+  const { id } = req["_user"];
+  console.log("id", id);
+  if (!id) {
+    return res.json({ error: "Falta el userId" });
+  }
+  const petsOfUser = await userController.findAllPetsOfUser(id);
+  return res.json(petsOfUser);
+});
 export default router;

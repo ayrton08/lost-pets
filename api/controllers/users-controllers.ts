@@ -1,4 +1,6 @@
-import { User } from "../models/user";
+import { User } from "../models";
+import { Pets } from "../models";
+import * as jwt from "jsonwebtoken";
 
 export class UserController {
   constructor() {}
@@ -17,4 +19,19 @@ export class UserController {
     }
     return newUser;
   }
+
+  async findAllPetsOfUser(id) {
+    try {
+      const allPets = await Pets.findAll({
+        where: {
+          UserId: id,
+        },
+      });
+      return allPets;
+    } catch (error) {
+      return new Error("No pudimos encontrar todos los pets reportados");
+    }
+  }
+
+  
 }

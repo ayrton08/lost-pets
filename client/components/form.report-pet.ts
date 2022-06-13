@@ -1,5 +1,6 @@
 import { mainState } from "../state";
 import { config } from "../../api/config";
+import * as jwt from "jsonwebtoken";
 const mapboxgl = require("mapbox-gl");
 import MapboxClient from "mapbox";
 const MAPBOX_TOKEN = config.mapboxToken;
@@ -56,22 +57,25 @@ export function reportPet() {
         mapa["style"].overflow = "inherit";
       }
 
+      const token = JSON.parse(localStorage.getItem("token"));
+      // const idUserToken = jwt.verify(token, "estoesunsecreto").id;
+      // console.log("dataToken", idUserToken);
+
       const eventReport = this.shadowRoot.querySelector(".form-report");
       eventReport.addEventListener("submit", async (e) => {
         e.preventDefault();
         const name = e.target["name"].value;
         const raza = e.target["raza"].value;
-        
-        const params = {
+
+        const data = {
           name,
           raza,
           pictureURL: "",
           lat: 2,
           lng: 2,
           state: true,
-          UserId: 1,
         };
-        const res = await mainState.doReport(params);
+        const res = await mainState.doReport(data, token.id);
         console.log("soy la respuesta del report", res);
       });
     }

@@ -66,6 +66,36 @@ const mainState = {
     return data;
   },
 
+  async updateDataUser(data) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const sendFormUpdate = await fetch(`${API_BASE_URL}/users/update`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Autorization: `${token.id}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    const dataForm = await sendFormUpdate.json();
+
+    return dataForm;
+  },
+  async myData() {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Autorization: `${token}`,
+      },
+    });
+
+    const dataForm = await sendFormData.json();
+    console.log("mydata", dataForm);
+    return dataForm;
+  },
+
   logOut() {
     const state = this.getState();
     localStorage.removeItem("token");
@@ -73,15 +103,16 @@ const mainState = {
     return this.setState(state);
   },
 
-  setToken(token: String) {
-    localStorage.setItem("token", JSON.stringify(token));
+  setToken(token) {
+    return localStorage.setItem("token", token);
   },
 
-  async doReport(params: Object) {
+  async doReport(params: Object, UserId) {
     const res = await fetch(`${API_BASE_URL}/pets/report-pet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `bearer ${UserId}`,
       },
       body: JSON.stringify(params),
     });
@@ -100,6 +131,18 @@ const mainState = {
     // state.myData.login = true;
     // this.setState(state);
     // return data;
+  },
+  async findMyReports(token: String) {
+    const res = await fetch(`${API_BASE_URL}/users/my-pets`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    console.log("soy las respuesta del form report", data);
+    return data;
   },
 
   setState(newState) {
