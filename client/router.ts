@@ -1,0 +1,66 @@
+import { homePage } from "./pages/home";
+import { registerPage } from "./pages/register";
+import { reportPage } from "./pages/view-report-pet";
+import { welcomePage } from "./pages/welcome";
+import { loginPage } from "./pages/login";
+import { doReportPet } from "./pages/report-Pet";
+
+const routes = [
+  {
+    path: /\/welcome/,
+    component: welcomePage,
+  },
+  {
+    path: /\/home/,
+    component: homePage,
+  },
+  {
+    path: /\/view-report/,
+    component: reportPage,
+  },
+  {
+    path: /\/register/,
+    component: registerPage,
+  },
+  {
+    path: /\/login/,
+    component: loginPage,
+  },
+  {
+    path: /\/do-report/,
+    component: doReportPet,
+  },
+];
+
+export function initRouter(container: Element) {
+  function goTo(path, data) {
+    history.pushState(data, "", path);
+    handleRoute(path);
+  }
+
+  function handleRoute(route) {
+    for (const r of routes) {
+      if (r.path.test(route)) {
+        const el = r.component({ goTo: goTo });
+
+        if (container.firstChild) {
+          container.firstChild.remove();
+        }
+        container.appendChild(el);
+      }
+    }
+  }
+
+  if (location.pathname === "/") {
+    goTo("/welcome", "");
+  } else {
+    handleRoute(location.pathname);
+  }
+  if (location.host.includes(".github.io")) {
+    goTo("/welcome", {});
+  }
+
+  window.onpopstate = () => {
+    handleRoute(location.pathname);
+  };
+}

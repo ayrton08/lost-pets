@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+.content{
+ display: flex;
+ justify-content: center;
+  align-items: center;
+  align-content: center;
+}

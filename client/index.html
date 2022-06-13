@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+
+    <title>Mascotas Perdidas</title>
+    <link rel="stylesheet" href="./pages/register/styles.css" />
+    <link rel="stylesheet" href="./pages/view-report-pet/index.css" />
+    <link rel="stylesheet" href="./pages/welcome/styles.css" />
+    <link rel="stylesheet" href="./pages/home/styles.css" />
+    <!-- <link rel="stylesheet" href="./components/header/header.css"> -->
+    <!-- <script defer src="./pages/report-pet/index.js"></script> -->
+    <script async type="module" src="./index.ts"></script>
+  </head>
+  <body>
+    <div class="root"></div>
+    <form class="search-form" style="display: none">
+      <input name="q" type="search" />
+      <button>Buscar</button>
+    </form>
+    <div id="map" style="width: 80%; height: 60%" class="mapa"></div>
+    <pre id="coordenadas"></pre>
+  </body>
+</html>

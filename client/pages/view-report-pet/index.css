@@ -1,0 +1,44 @@
+.search-form {
+  background-color: coral;
+  padding: 10px;
+}
+
+body,
+input,
+button {
+  font-size: 24px;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+.mapa {
+  margin: 50px;
+}
+
+.mapboxgl-canvas {
+  border-radius: 10px !important;
+  border: solid 1px blueviolet;
+}
+
+.contenedor {
+  background-color: #FFA000;
+}
+
+.marker {
+  display: block;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+
+
+  }

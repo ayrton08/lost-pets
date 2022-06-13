@@ -1,0 +1,38 @@
+import * as express from "express";
+import { User } from "../models/user";
+import { AuthController } from "../controllers/auth-controllers";
+import { config } from "../config";
+const router = express.Router();
+const secret = config.secretValidator;
+const authController = new AuthController();
+// signup
+
+router.post("/", async (req, res, next) => {});
+
+// aca hago el login del user
+router.post("/signin", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new Error("Faltan parametros en signInToken");
+  }
+
+  try {
+    const signToken = await authController.singInToken(email, password);
+    if (signToken) {
+      console.log("soy el token", signToken);
+      return res.json(signToken);
+    }
+    throw new Error();
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+});
+
+router.get("/me", authController.authMiddleware, async (req, res) => {
+  const user = await User.findByPk(req["_user"].id);
+  console.log(user);
+
+  res.json(user);
+});
+
+export default router;

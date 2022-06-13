@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+}
+
+.title-welcome {
+  font-size: 30px;
+}
+
+.title-main {
+  font-size: 50px;
+  font-weight: bold
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px 50px 50px;
+  text-align: center;
+  align-items: center;
+  gap: 50px;
+  background-color: #5dade2;
+  height: 100vh;
+}
+
+.location {
+  height: 50px;
+  min-width: 300px;
+  background-color: #dc7633;
+  border-radius: 5px;
+}
+
+.buttons-intro {
+  font-size: 20px;
+}
+
+.button-login {
+  border-radius: 5px;
+  width: 60%;
+  height: 40px;
+  background-color: #9ccc65;
+  margin: 20px;
+}
+
+.button-register {
+  border-radius: 5px;
+  margin: 20px;
+  width: 60%;
+  height: 40px;
+  background-color: #9ccc65;
+}
