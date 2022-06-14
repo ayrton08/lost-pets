@@ -22,7 +22,7 @@ export class PetsController {
     return hits;
   }
 
-  async updateReportAlgolia(id, name, state, lat, lng, UserId) {
+  async updateReportAlgolia(id, name, state, lat, lng, user_id, pictureURL) {
     const algoliaRes = await index.saveObject({
       objectID: id,
       name: name,
@@ -31,7 +31,8 @@ export class PetsController {
         lat: lat,
         lng: lng,
       },
-      UserId,
+      user_id,
+      pictureURL,
     });
     return algoliaRes;
   }

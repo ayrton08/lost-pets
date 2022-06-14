@@ -46,9 +46,9 @@ router.post(
         state,
         lat,
         lng,
-        userId
+        userId,
+        newPet["pictureURL"]
       );
-      console.log("endpoint", newPet);
       return res.json(newPet);
     } catch (error) {
       next(error);

@@ -14,7 +14,7 @@ export function homePage(params) {
     </div>
     <template id="portfolio-template">
             <div class="pets-card">
-                <img class="logo-section-two" />
+                <img class="logo-section-two" style="width: 200px;" />
                 <span class="title"></span>
                 <a class="informacion"></a>
             </div>
@@ -41,7 +41,7 @@ export function homePage(params) {
     const container = document.querySelector(".services-section-two");
 
     template["content"].querySelector(".logo-section-two").src =
-      params["image"];
+      params["pictureURL"];
     template["content"].querySelector(".title").textContent = params["name"];
     template["content"].querySelector(".informacion").textContent =
       "Reportar Informacion";
