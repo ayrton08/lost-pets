@@ -105,31 +105,20 @@ const mainState = {
     return localStorage.setItem("token", token);
   },
 
-  async doReport(params: Object, UserId) {
+  async doReport(dataForm: Object, UserId) {
     const res = await fetch(`${API_BASE_URL}/pets/report-pet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `bearer ${UserId}`,
       },
-      body: JSON.stringify(params),
+      body: JSON.stringify(dataForm),
     });
     const data = await res.json();
     console.log("soy las respuesta del form report", data);
-    // if (data.registrado) {
-    //   state.myData.fullname = data.newUser.fullname;
-    //   state.myData.email = data.newUser.email;
-    //   state.myData.password = data.auth.password;
-    // }
-    // if(sendFormLogin.status === 400){
-    //   return console.error("contraseña incorrecta")
-    // }
-    // const data = await sendFormLogin.json();
-    // state.myData.token = data.signToken;
-    // state.myData.login = true;
-    // this.setState(state);
-    // return data;
+    
   },
+  
   async findMyReports(token: String) {
     const res = await fetch(`${API_BASE_URL}/users/my-pets`, {
       method: "GET",

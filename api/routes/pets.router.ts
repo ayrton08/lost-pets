@@ -30,8 +30,7 @@ router.post(
   "/report-pet",
   authControllers.authMiddleware,
   async (req, res, next) => {
-    const userId = req["_user"].id;
-
+    const userId = req["_user"]["user"].id;
     try {
       const newPetData = {
         ...req.body,
@@ -49,7 +48,7 @@ router.post(
         lng,
         userId
       );
-
+      console.log("endpoint", newPet);
       return res.json(newPet);
     } catch (error) {
       next(error);

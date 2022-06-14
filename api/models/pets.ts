@@ -10,6 +10,7 @@ Pets.init(
     lat: DataTypes.FLOAT,
     lng: DataTypes.FLOAT,
     state: DataTypes.STRING,
+    user_id: DataTypes.INTEGER,
   },
   { sequelize, modelName: "Pet" }
 );

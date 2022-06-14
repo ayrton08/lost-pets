@@ -1,7 +1,7 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
 // const API_BASE_URL = config.apiUrl me tira undefided la variable de ambiente
-const API_BASE_URL = "http://localhost:3000/api/v1"
+const API_BASE_URL = "http://localhost:3000/api/v1";
 export function homePage(params) {
   const div = document.createElement("div");
   div.className = "contenedor";
@@ -28,6 +28,7 @@ export function homePage(params) {
     mainState.setState(state);
 
     getDataPets().then((data) => {
+      console.log("data", data);
       for (const c of data) {
         console.log(c);
         addPetCard(c);

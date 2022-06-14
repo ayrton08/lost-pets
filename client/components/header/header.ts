@@ -10,9 +10,7 @@ export function header() {
     render() {
       this.attachShadow({ mode: "open" });
       const div = document.createElement("header");
-      div.className = "root";
-      const stateLocal = JSON.parse(localStorage.getItem("token"));
-      console.log("state local storage",stateLocal)
+      const stateLocal = localStorage.getItem("token");
       if (!stateLocal) {
         div.innerHTML = `
         <div class="container-header">
@@ -32,7 +30,6 @@ export function header() {
         </div>
       ${this.getStyles()}`;
         this.shadowRoot.appendChild(div);
-        console.log("entre al primer if");
         const goToLogin = this.shadowRoot.querySelector(".goto-login");
         goToLogin.addEventListener("click", () => {
           location.pathname = "login";
@@ -55,20 +52,18 @@ export function header() {
         });
         return;
       } else {
-        console.log("entre al segundo if");
-
         div.innerHTML = `
         <div class="container-header">
-        <div class="izquierda">
-          <a class="button-home">
-              <span class="logo">🐶</span>
-          </a>
+          <div class="izquierda">
+            <a class="button-home">
+                <span class="logo">🐶</span>
+            </a>
+          </div>
+          <div class="derecha">
+             <button class="abre-ventana">☰</button>
+          </div>
         </div>
-        <div class="derecha">
-           <button class="abre-ventana">☰</button>
-        </div>
-
-        </div>
+        
         <div class="menu-modal">
         <button class="modal-close">❌</button>
           
@@ -82,38 +77,38 @@ export function header() {
           </div>
         </div>
       ${this.getStyles()}`;
+        this.shadowRoot.appendChild(div);
+
+        const nameUser = this.shadowRoot.querySelector(".name-user");
+        // if (stateLocal.fullname) {
+        //   nameUser.textContent = `${stateLocal.fullname}`;
+        // }
+
+        // const closeSession = this.shadowRoot.querySelector(".close-session");
+        // closeSession.addEventListener("click", () => {
+        //   mainState.logOut();
+        // });
+
+        const openMenu = this.shadowRoot.querySelector(".derecha");
+        const closeMenu = this.shadowRoot.querySelector(".modal-close");
+        openMenu.addEventListener("click", () => {
+          const container = this.shadowRoot.querySelector(".menu-modal");
+          container["style"].display = "flex";
+        });
+        closeMenu.addEventListener("click", () => {
+          const container = this.shadowRoot.querySelector(".menu-modal");
+          container["style"].display = "none";
+        });
+
+        const doReport = this.shadowRoot.querySelector(".do-report");
+        doReport.addEventListener("click", () => {
+          location.pathname = "do-report";
+        });
+        const myReports = this.shadowRoot.querySelector(".my-reports");
+        myReports.addEventListener("click", () => {
+          location.pathname = "my-reports";
+        });
       }
-      this.shadowRoot.appendChild(div);
-
-      const nameUser = this.shadowRoot.querySelector(".name-user");
-      // if (stateLocal.fullname) {
-      //   nameUser.textContent = `${stateLocal.fullname}`;
-      // }
-
-      // const closeSession = this.shadowRoot.querySelector(".close-session");
-      // closeSession.addEventListener("click", () => {
-      //   mainState.logOut();
-      // });
-
-      const openMenu = this.shadowRoot.querySelector(".derecha");
-      const closeMenu = this.shadowRoot.querySelector(".modal-close");
-      openMenu.addEventListener("click", () => {
-        const container = this.shadowRoot.querySelector(".menu-modal");
-        container["style"].display = "flex";
-      });
-      closeMenu.addEventListener("click", () => {
-        const container = this.shadowRoot.querySelector(".menu-modal");
-        container["style"].display = "none";
-      });
-
-      const doReport = this.shadowRoot.querySelector(".do-report");
-      doReport.addEventListener("click", () => {
-        location.pathname = "do-report";
-      });
-      const myReports = this.shadowRoot.querySelector(".my-reports");
-      myReports.addEventListener("click", () => {
-        location.pathname = "my-reports";
-      });
     }
     getStyles() {
       return `
@@ -125,7 +120,6 @@ export function header() {
                   justify-content: space-between;
                   background-color: #D2B4DE;
                   font-size: 50px;
-
                 }
 
                 .menu-modal {
@@ -164,12 +158,9 @@ export function header() {
                   right: 30px;
                   bottom: 690px;
                 }
-
-                
                </style>
                 `;
     }
   }
-
   customElements.define("comp-header", Header);
 }

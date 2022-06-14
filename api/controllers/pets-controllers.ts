@@ -1,17 +1,9 @@
-import { Pets } from "../models/pets";
+import { Pets } from "../models";
 import { index } from "../lib/algolia";
+import { cloudinary } from "../lib/cloudinary";
 
 export class PetsController {
   constructor() {}
-
-  async reportLostPet(params) {
-    try {
-      const newPet = await Pets.create(params);
-      return newPet;
-    } catch (error) {
-      return new Error("No pudimos crear el report de la pet");
-    }
-  }
 
   async findAllPets() {
     try {
@@ -56,7 +48,7 @@ export class PetsController {
       rta.state = body.state;
     }
     if (body.UserId) {
-      rta.UserId = body.UserId;
+      rta.user_id = body.UserId;
     }
     if (body.lat && body.lng) {
       rta._geoloc = {
@@ -68,5 +60,30 @@ export class PetsController {
       rta.objectID = id;
     }
     return rta;
+  }
+
+  async reportLostPet(updateData) {
+    if (updateData.pictureURL) {
+      const image = await cloudinary.uploader.upload(updateData.pictureURL, {
+        resource_type: "image",
+        discard_original_filename: true,
+        width: 1000,
+      });
+      const dataComplete = {
+        name: updateData.name,
+        raza: updateData.raza,
+        pictureURL: image.secure_url,
+        lat: updateData.lat,
+        lng: updateData.lng,
+        state: updateData.state,
+        user_id: updateData.UserId,
+      };
+
+      const res = await Pets.create(dataComplete);
+
+      return res;
+    } else {
+      console.error("No hay imagen adjunta");
+    }
   }
 }

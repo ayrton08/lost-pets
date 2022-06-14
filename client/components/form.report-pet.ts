@@ -1,10 +1,7 @@
 import { mainState } from "../state";
-import { config } from "../../api/config";
-import * as jwt from "jsonwebtoken";
-const mapboxgl = require("mapbox-gl");
-import MapboxClient from "mapbox";
-const MAPBOX_TOKEN = config.mapboxToken;
-const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
+import Dropzone from "dropzone";
+import { map } from "./mapa";
+
 export function reportPet() {
   class ReportPet extends HTMLElement {
     constructor() {
@@ -20,7 +17,6 @@ export function reportPet() {
       const div = document.createElement("div");
       div.className = "container-report";
       div.innerHTML = `
-        <div>
         <form class="form-report">
             <label>
               <h3>Nombre</h3>
@@ -30,23 +26,22 @@ export function reportPet() {
               <h3>Raza</h3>
               <input type="text" name="raza" class="raza" placeholder="Raza" />
             </label>
-            <div class="profile-picture-container">
-            <img class="profile-picture" />
-            <h3>Arraste su foto aqui</h3>
-            </div>
+              <div class="profile-picture-container">
+                <img class="profile-picture" />
+                <h3>Arraste su foto aqui</h3>
+              </div>
             <label>
                 <div>aca va el map</div>
             </label>
             <span>
-            Buscá un punto de referencia para reportar a tu mascota. Puede ser una dirección, un barrio o una ciudad.
+              Buscá un punto de referencia para reportar a tu mascota. Puede ser una dirección, un barrio o una ciudad.
             </span>
             <button>Reportar como Perdido</button>
             <button>Cancelar</button>
-
         </form>
-        </div>
           ${this.getStyles()}`;
       this.shadowRoot.appendChild(div);
+
       const body = document.querySelector("body");
       const searchMap = document.querySelector(".search-form");
       const mapa = document.querySelector(".mapboxgl-map");
@@ -57,26 +52,47 @@ export function reportPet() {
         mapa["style"].overflow = "inherit";
       }
 
-      const token = JSON.parse(localStorage.getItem("token"));
-      // const idUserToken = jwt.verify(token, "estoesunsecreto").id;
-      // console.log("dataToken", idUserToken);
+      const token = localStorage.getItem("token");
 
-      const eventReport = this.shadowRoot.querySelector(".form-report");
-      eventReport.addEventListener("submit", async (e) => {
+      const form = this.shadowRoot.querySelector(".form-report");
+      const profile = this.shadowRoot.querySelector(
+        ".profile-picture-container"
+      );
+      let imageDataURL;
+
+      const myDropzone = new Dropzone(profile, {
+        url: "/falsa",
+        autoProcessQueue: false,
+        clickable: true,
+      });
+      myDropzone.on("addedfile", function (file) {
+        // usando este evento pueden acceder al dataURL directamente
+        imageDataURL = file;
+        console.log(file);
+      });
+
+      const state = mainState.getState();
+      navigator.geolocation.getCurrentPosition((position) => {
+        state.myData.location.lat = position.coords.latitude;
+        state.myData.location.lng = position.coords.longitude;
+        mainState.setState(state);
+      });
+      console.log(state)
+
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const name = e.target["name"].value;
         const raza = e.target["raza"].value;
-
         const data = {
           name,
           raza,
-          pictureURL: "",
-          lat: 2,
-          lng: 2,
+          pictureURL: imageDataURL.dataURL,
+          lat: state.myData.location.lat,
+          lng: state.myData.location.lng,
           state: true,
         };
-        const res = await mainState.doReport(data, token.id);
-        console.log("soy la respuesta del report", res);
+        console.log("data", data);
+        const res = await mainState.doReport(data, token);
       });
     }
     getStyles() {
@@ -110,57 +126,7 @@ export function reportPet() {
                 `;
     }
   }
-  function initMap() {
-    mapboxgl.accessToken = MAPBOX_TOKEN;
-    let map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [-64.196077, -31.409922],
-      zoom: 4,
-    });
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      })
-    );
-    map.addControl(new mapboxgl.NavigationControl());
-
-    return map;
-  }
-
-  function initSearchForm(callback) {
-    const form = document.querySelector(".search-form");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      mapboxClient.geocodeForward(
-        e.target["q"].value,
-        {
-          // country: "ar",
-          autocomplete: true,
-          language: "es",
-        },
-        function (err, data, res) {
-          if (!err) callback(data.features);
-        }
-      );
-    });
-  }
-
-  (function () {
-    const map = initMap();
-    initSearchForm(function (results) {
-      const firstResult = results[0];
-      const marker = new mapboxgl.Marker()
-        .setLngLat(firstResult.geometry.coordinates)
-        .addTo(map);
-
-      map.setCenter(firstResult.geometry.coordinates);
-      map.setZoom(13);
-    });
-  })();
+  map();
 
   customElements.define("form-report-pet", ReportPet);
 }

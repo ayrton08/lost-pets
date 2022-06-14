@@ -7,7 +7,7 @@ export function myDataPage(params) {
   div.innerHTML = `
     <div class="content-home">
       <span class="title-welcome">Mis Datos</span>
-      <form class="my-data">
+    <form class="my-data">
       <label>
         <h3>Fullname</h3>
         <input type="text" name="fullname" class="fullname"  />
@@ -30,8 +30,12 @@ export function myDataPage(params) {
   (async function () {
     const state = await mainState.myData();
     console.log("data", state);
-    const name = document.querySelector(".fullname");
-    name["value"] = state.fullname;
+
+    const form = document.querySelector(".my-data")
+    form["fullname"].value = state.fullname
+
+    // const name = document.querySelector(".fullname");
+    // name["value"] = state.fullname;
     const passwordFirst = document.querySelector(".password-first");
     passwordFirst["value"] = "solorelleno";
     const passwordSecond = document.querySelector(".password-second");
