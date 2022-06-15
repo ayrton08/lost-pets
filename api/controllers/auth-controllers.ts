@@ -31,12 +31,14 @@ export class AuthController {
         password: passwordHash,
       },
     });
+    // if (!auth) {
+    //   throw new Error("contraseña incorrecta");
+    // }
     const id = Number(auth.get("user_id"));
     const user = await User.findByPk(id);
-    if (!auth) {
-      throw new Error("contraseña incorrecta");
-    }
-    const token = jwt.sign({ user }, "estoesunsecreto");
+    console.log("userencontrado", user);
+    const token = jwt.sign(user["dataValues"], "estoesunsecreto");
+    console.log("token", token);
     return token;
   }
 

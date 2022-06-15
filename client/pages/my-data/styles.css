@@ -6,27 +6,16 @@ body {
   margin: 0px;
 }
 
-.title-find-pets {
-  font-size: 40px;
-}
-
-.contenedor {
+.my-data-form {
   display: flex;
   flex-direction: column;
-}
-.content-home {
-  display: flex;
-  flex-direction: column;
-  padding: 50px 50px 0px 50px;
-  text-align: center;
-  gap: 20px;
-  background-color: #2ecc71;
-  height: 100vh;
-}
-
-.pets-card {
-  border: solid 2px;
+  align-items: center;
+  background-color: #F8C471;
   border-radius: 5px;
-  margin: 20px 50px;
-  background-color: #D2B4DE;
+  max-width: 400px;
+}
+
+.save-data {
+  max-width: 150px;
+  margin: 20px;
 }

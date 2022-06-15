@@ -5,4 +5,4 @@ import { Auth } from "./auth";
 User.hasMany(Pets);
 Pets.belongsTo(User);
 
-export { User, Pets };
+export { User, Pets, Auth };

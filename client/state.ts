@@ -55,6 +55,7 @@ const mainState = {
       body: JSON.stringify({ email, password }),
     });
     if (sendFormLogin.status === 400) {
+      console.log("respuesta", sendFormLogin);
       return console.error("contraseña incorrecta");
     }
 
@@ -91,6 +92,7 @@ const mainState = {
       },
     });
     const dataForm = await sendFormData.json();
+    console.log("dataForm", dataForm);
     return dataForm;
   },
 
@@ -116,9 +118,8 @@ const mainState = {
     });
     const data = await res.json();
     console.log("soy las respuesta del form report", data);
-    
   },
-  
+
   async findMyReports(token: String) {
     const res = await fetch(`${API_BASE_URL}/users/my-pets`, {
       method: "GET",

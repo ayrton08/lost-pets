@@ -67,7 +67,7 @@ export function header() {
         <div class="menu-modal">
         <button class="modal-close">❌</button>
           
-          <span>Mis Datos</span>
+          <span class="my-data">Mis Datos</span>
           <span class="my-reports">Mis Mascotas Reportadas</span>
           <span class="do-report">Reportar Mascota</span>
           
@@ -100,6 +100,10 @@ export function header() {
           container["style"].display = "none";
         });
 
+        const myData = this.shadowRoot.querySelector(".my-data");
+        myData.addEventListener("click", () => {
+          location.pathname = "my-data";
+        });
         const doReport = this.shadowRoot.querySelector(".do-report");
         doReport.addEventListener("click", () => {
           location.pathname = "do-report";
@@ -154,7 +158,7 @@ export function header() {
                 .modal-close {
                   position: absolute;
                   top: 35px;
-                  left: 300px;
+                  left: 350px;
                   right: 30px;
                   bottom: 690px;
                 }
