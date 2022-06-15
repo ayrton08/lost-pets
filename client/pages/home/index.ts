@@ -28,7 +28,6 @@ export function homePage(params) {
     mainState.setState(state);
 
     getDataPets().then((data) => {
-      console.log("data", data);
       for (const c of data) {
         console.log(c);
         addPetCard(c);
@@ -53,7 +52,6 @@ export function homePage(params) {
   async function getDataPets() {
     const lat = state.myData.location.lat;
     const lng = state.myData.location.lng;
-    console.log("location", { lat, lng });
     const response = await fetch(
       `${API_BASE_URL}/pets/find-by-location?lat=${lat}&lng=${lng}`,
       {

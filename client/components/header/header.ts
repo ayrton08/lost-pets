@@ -15,7 +15,7 @@ export function header() {
         div.innerHTML = `
         <div class="container-header">
         <div class="izquierda">
-          <a href="./index.html">
+          <a>
               <span class="logo">🐶</span>
           </a>
         </div>
@@ -30,6 +30,13 @@ export function header() {
         </div>
       ${this.getStyles()}`;
         this.shadowRoot.appendChild(div);
+        
+        
+        const goToHome = this.shadowRoot.querySelector(".logo");
+        goToHome.addEventListener("click", () => {
+          location.pathname = "home";
+        });
+        
         const goToLogin = this.shadowRoot.querySelector(".goto-login");
         goToLogin.addEventListener("click", () => {
           location.pathname = "login";

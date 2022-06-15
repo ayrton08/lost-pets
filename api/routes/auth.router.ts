@@ -13,9 +13,7 @@ router.post("/signin", async (req, res) => {
       throw new Error("Faltan parametros en signInToken");
     }
     const signToken = await authController.singInToken(email, password);
-    console.log("signinToken", signToken);
     if (signToken) {
-      console.log("soy el token", signToken);
       return res.json(signToken);
     }
     throw new Error();
@@ -26,9 +24,7 @@ router.post("/signin", async (req, res) => {
 
 router.get("/my-data", authController.authMiddleware, async (req, res) => {
   const { id } = req["_user"];
-  console.log("id", id);
   const user = await User.findByPk(id);
-  console.log("user", user);
   res.json(user);
 });
 

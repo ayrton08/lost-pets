@@ -1,5 +1,6 @@
 import { config } from "../../api/config";
 import MapboxClient from "mapbox";
+import { mainState } from "../state";
 const mapboxgl = require("mapbox-gl");
 const MAPBOX_TOKEN = config.mapboxToken;
 const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
@@ -42,16 +43,27 @@ function initSearchForm(callback) {
     );
   });
 }
-
+const state = mainState.getState();
 export function map() {
   const map = initMap();
   initSearchForm(function (results) {
-    const firstResult = results[0];
-    const marker = new mapboxgl.Marker()
-      .setLngLat(firstResult.geometry.coordinates)
-      .addTo(map);
-
-    map.setCenter(firstResult.geometry.coordinates);
-    map.setZoom(13);
+    const resultsSearch = results[1];
+    console.log(resultsSearch);
+    if (!resultsSearch) {
+      const firstResult = [
+        state.myData.location.lng,
+        state.myData.location.lat,
+      ];
+      console.log("results map", firstResult);
+      const marker = new mapboxgl.Marker().setLngLat(firstResult).addTo(map);
+      map.setCenter(firstResult);
+      map.setZoom(16);
+    } else {
+      const marker = new mapboxgl.Marker()
+        .setLngLat(resultsSearch.geometry.coordinates)
+        .addTo(map);
+      map.setCenter(resultsSearch.geometry.coordinates);
+      map.setZoom(16);
+    }
   });
 }

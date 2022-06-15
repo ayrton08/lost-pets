@@ -36,9 +36,7 @@ export class AuthController {
     // }
     const id = Number(auth.get("user_id"));
     const user = await User.findByPk(id);
-    console.log("userencontrado", user);
     const token = jwt.sign(user["dataValues"], "estoesunsecreto");
-    console.log("token", token);
     return token;
   }
 

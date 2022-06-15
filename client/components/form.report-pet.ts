@@ -19,26 +19,23 @@ export function reportPet() {
       div.innerHTML = `
         <form class="form-report">
             <label>
-              <h3>Nombre</h3>
+              <h3 class="subtitle">Nombre</h3>
               <input type="text" name="name" class="input-name" placeholder="Your Name" />
             </label>
             <label>
-              <h3>Raza</h3>
+              <h3 class="subtitle">Raza</h3>
               <input type="text" name="raza" class="raza" placeholder="Raza" />
             </label>
               <div class="profile-picture-container">
-                <img class="profile-picture" />
-                <h3>Arraste su foto aqui</h3>
+                <span class="logo-pic">📸</span>
+                <h3 class="subtitle">Arraste su foto aqui</h3>
               </div>
-            <label>
-                <div>aca va el map</div>
-            </label>
-            <span>
-              Buscá un punto de referencia para reportar a tu mascota. Puede ser una dirección, un barrio o una ciudad.
-            </span>
-            <button>Reportar como Perdido</button>
-            <button>Cancelar</button>
-        </form>
+              <span class="instructions-search">
+                Buscá un punto de referencia para reportar a tu mascota. Puede ser una dirección, un barrio o una ciudad.
+              </span>
+              <button class="send-form">Reportar como Perdido</button>
+              </form>
+              <button class="button-cancelar">Cancelar</button>
           ${this.getStyles()}`;
       this.shadowRoot.appendChild(div);
 
@@ -47,7 +44,7 @@ export function reportPet() {
       const mapa = document.querySelector(".mapboxgl-map");
 
       if (location.pathname.includes("do-report")) {
-        body["style"].backgroundColor = "#FFCCBC";
+        body["style"].backgroundColor = "#CFD8DC";
         searchMap["style"].display = "inherit";
         mapa["style"].overflow = "inherit";
       }
@@ -68,16 +65,13 @@ export function reportPet() {
       myDropzone.on("addedfile", function (file) {
         // usando este evento pueden acceder al dataURL directamente
         imageDataURL = file;
-        console.log(file);
       });
-
       const state = mainState.getState();
       navigator.geolocation.getCurrentPosition((position) => {
         state.myData.location.lat = position.coords.latitude;
         state.myData.location.lng = position.coords.longitude;
         mainState.setState(state);
       });
-      console.log(state)
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -91,8 +85,8 @@ export function reportPet() {
           lng: state.myData.location.lng,
           state: true,
         };
-        console.log("data", data);
         const res = await mainState.doReport(data, token);
+        return location.pathname = "my-reports"
       });
     }
     getStyles() {
@@ -101,13 +95,12 @@ export function reportPet() {
                 .container-report{
                   display: flex;
                   flex-direction: column;
-                  width: 80%;
+                  border-radius: 5px;
                   text-align: center;
-                  border: solid 3px;
                   background-color: #CFD8DC;
-                  align-content: center;
+                  align-items: center;
                   justify-content: center;
-                  margin:20px;
+                  margin:40px 40px 0 40px;
   
                 }
 
@@ -115,12 +108,44 @@ export function reportPet() {
                   display:flex;
                   flex-direction:column;
                   gap:30px;
-                  padding:30px;
+                  padding:30px 30px 0 30px;
                   align-items: center;
                 }
 
                 button {
-                  max-width:50%;
+                  max-width:60%;
+                }
+
+                .profile-picture-container {
+                  min-width:200px;
+                  min-height: 150px;
+                  background-color: #E5E8E8;
+
+                }
+
+                .logo-pic{
+                  font-size: 100px;
+                }
+                
+                .subtitle{
+                  margin: 0px;
+                  font-size: 20px;
+                }
+                .instructions-search {
+                  font-size: 20px;
+                }
+
+                .button-cancelar{
+                  margin:15px;
+                  background-color: red;
+                  min-width:100px;
+                  min-height: 40px;
+                }
+
+                .send-form{
+                  background-color: green;
+                  min-width:100px;
+                  min-height: 40px;
                 }
                </style>
                 `;

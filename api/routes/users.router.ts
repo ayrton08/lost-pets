@@ -37,7 +37,6 @@ router.patch("/update", authController.authMiddleware, async (req, res) => {
 
 router.get("/my-pets", authController.authMiddleware, async (req, res) => {
   const { id } = req["_user"];
-  console.log("id", id);
   if (!id) {
     return res.json({ error: "Falta el userId" });
   }

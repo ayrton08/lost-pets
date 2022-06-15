@@ -24,16 +24,12 @@ export function myDataPage(params) {
       </label>
 
       <button class="save-data">Guardar</button>
-  </form>
+      </form>
     </div>
     
     `;
   (async function () {
     const state = await mainState.myData();
-    console.log("data", state);
-
-    // const form = document.querySelector(".my-data")
-    // form["fullname"].value = state.fullname
 
     const name = document.querySelector(".fullname");
     name["value"] = state.fullname;
@@ -41,6 +37,18 @@ export function myDataPage(params) {
     passwordFirst["value"] = "solorelleno";
     const passwordSecond = document.querySelector(".password-second");
     passwordSecond["value"] = "solorelleno";
+
+    const saveData = document.querySelector(".save-data");
+    saveData.addEventListener("click", (e) => {
+      e.preventDefault();
+      let name = document.querySelector(".fullname");
+      let password = document.querySelector(".password-first");
+      let passwordSecond = document.querySelector(".password-second");
+
+      if (name["value"] != state.fullname ) {
+        console.log("el nombre cambio");
+      }
+    });
   })();
 
   return div;

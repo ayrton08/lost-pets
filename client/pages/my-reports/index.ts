@@ -13,7 +13,7 @@ export function myReportsPage(params) {
     </div>
     <template id="portfolio-template">
             <div class="pets-card">
-                <img class="logo-section-two" />
+                <img class="logo-section-two" style="max-width:200px;" />
                 <span class="title"></span>
                 <a class="informacion"></a>
             </div>
@@ -32,7 +32,7 @@ export function myReportsPage(params) {
     const container = document.querySelector(".services-section-two");
 
     template["content"].querySelector(".logo-section-two").src =
-      params["image"];
+      params["pictureURL"];
     template["content"].querySelector(".title").textContent = params["name"];
     template["content"].querySelector(".informacion").textContent =
       "Reportar Informacion";
@@ -42,8 +42,8 @@ export function myReportsPage(params) {
   }
 
   async function getDataPets() {
-    const token = JSON.parse(localStorage.getItem("token"));
-    const response = await mainState.findMyReports(token.id);
+    const token = localStorage.getItem("token");
+    const response = await mainState.findMyReports(token);
     console.log("esta es la repuesta de las pets que son mias", response);
     return response;
   }

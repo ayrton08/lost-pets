@@ -1,7 +1,6 @@
 import { config } from "./config";
 // const API_BASE_URL = config.apiUrl; me da undefined cuando lo traigo como variable de ambiente
 const API_BASE_URL = "http://localhost:3000/api/v1";
-console.log(API_BASE_URL);
 
 const mainState = {
   data: {
@@ -55,7 +54,6 @@ const mainState = {
       body: JSON.stringify({ email, password }),
     });
     if (sendFormLogin.status === 400) {
-      console.log("respuesta", sendFormLogin);
       return console.error("contraseña incorrecta");
     }
 
@@ -84,7 +82,6 @@ const mainState = {
   },
   async myData() {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
       method: "GET",
       headers: {
@@ -92,7 +89,6 @@ const mainState = {
       },
     });
     const dataForm = await sendFormData.json();
-    console.log("dataForm", dataForm);
     return dataForm;
   },
 
@@ -117,7 +113,6 @@ const mainState = {
       body: JSON.stringify(dataForm),
     });
     const data = await res.json();
-    console.log("soy las respuesta del form report", data);
   },
 
   async findMyReports(token: String) {
@@ -129,7 +124,6 @@ const mainState = {
       },
     });
     const data = await res.json();
-    console.log("soy las respuesta del form report", data);
     return data;
   },
 

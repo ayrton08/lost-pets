@@ -3,10 +3,9 @@ export function doReportPet(params) {
   div.className = "root";
   div.innerHTML = `
       <comp-header></comp-header>
-      <h3>Reportar mascota perdida </h3>
+      <h3 class="title-report">Reportar mascota perdida</h3>
       <form-report-pet></form-report-pet>
       `;
-  
 
   return div;
 }
