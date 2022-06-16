@@ -30,7 +30,7 @@ body {
   align-items: flex-start;
   border-radius: 5px;
   margin: 20px;
-  background-color: #FFF59D ;
+  background-color: #fff59d;
   padding: 20px;
 }
 
@@ -38,17 +38,52 @@ body {
   font-size: 20px;
 }
 
-.title{
+.title {
   font-size: 30px;
   color: blue;
 }
 
-.informacion{
+.informacion {
   font-size: 20px;
   color: red;
   cursor: pointer;
 }
 
-.form-info{
-  border: solid 3px;
+
+
+.card-info-pic {
+  max-width: 200px;
+}
+
+.form-report {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: beige;
+  border-radius: 5px;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.textarea-last-place{
+  display: flex;
+  flex-direction: column;
+}
+
+.last-place{
+  width: 250px;
+  height: 100px;
+}
+
+.name-pet{
+  font-size: 50px;
+  color: darkmagenta;
+  font-weight: bold;
+}
+
+.time-report{
+  
+  color: blue;
 }

@@ -41,35 +41,55 @@ export function homePage(params) {
     const cardDiv = document.createElement("div");
     cardDiv.className = "pets-card";
     cardDiv.innerHTML = `
-        <div>
+        
                 <img class="logo-section-two" style="width: 100%;" src='${params["pictureURL"]}' />
                 <span class="title-name">Nombre: ${params["name"]} <span class="title"></span></span>
                 <a id='${params["objectID"]}'>Reportar</a>
-        </div>`;
+       `;
 
     cardDiv.addEventListener("click", async () => {
       const id = Number(`${params["objectID"]}`);
       const search = await mainState.findById(id);
-      const formInfo = document.querySelector(".form-info")
+      console.log("resultado", search);
+      window.scroll({
+        top: 100,
+        left: 100,
+        behavior: "smooth",
+      });
+      const formInfo = document.querySelector(".form-info");
       formInfo.innerHTML = `
+        <button class="close-report">❌</button>
         <form class="form-report">
+            
+            <span class="name-pet">${search.name}</span>
+            <span >Reportado el: <span class="time-report">${search.createdAt.slice(
+              0,
+              16
+            )}</span></span>
+
+            <img class="card-info-pic" src="${search.pictureURL}"></img>
             <label>
-              <h3>Tu Nombre</h3>
+              <span>Tu Nombre</span>
               <input type="text" name="email" class="input-email" placeholder="Your Name" />
             </label>
             <label class="container-password">
-              <h3>Tu Telefono</h3>
+              <span>Tu Telefono</span>
               <input type="text" name="password" class="password-first" placeholder="Your Cellphone" />
             </label>
-            <label>
-                <h2>¿Donde lo viste?</h2>
+            <label class="textarea-last-place">
+                <span>¿Donde lo viste?</span>
                 <textarea name="last-place" class="last-place"></textarea>
             </label>
             <br>
             <button>Enviar</button>
         </form>
+        
       `;
-      console.log("state home", state);
+
+      const buttonClose = document.querySelector(".close-report");
+      buttonClose.addEventListener("click", () => {
+        formInfo.innerHTML = "";
+      });
     });
 
     const divNew = document.querySelector(".content-home");
