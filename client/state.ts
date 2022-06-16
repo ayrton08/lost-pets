@@ -15,6 +15,7 @@ const mainState = {
         lng: "",
       },
     },
+    reportId: "",
   },
   listeners: [],
 
@@ -66,17 +67,19 @@ const mainState = {
   },
 
   async updateDataUser(data) {
-    const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
+    console.log("token", token);
     const sendFormUpdate = await fetch(`${API_BASE_URL}/users/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `bearer ${token.id}`,
+        Authorization: `bearer ${token}`,
       },
       body: JSON.stringify(data),
     });
 
     const dataForm = await sendFormUpdate.json();
+    console.log("respuesta del cambio de datos", dataForm);
 
     return dataForm;
   },
@@ -125,6 +128,17 @@ const mainState = {
     });
     const data = await res.json();
     return data;
+  },
+
+  async findById(id) {
+    const res = await fetch(`${API_BASE_URL}/pets/by-id/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const pet = await res.json();
+    return pet;
   },
 
   setState(newState) {

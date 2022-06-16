@@ -17,6 +17,7 @@ export class AuthController {
     try {
       const data = jwt.verify(token, secret);
       req["_user"] = data;
+      console.log("soy la data", data);
       next();
     } catch (error) {
       res.status(401).json(error);
@@ -31,9 +32,9 @@ export class AuthController {
         password: passwordHash,
       },
     });
-    // if (!auth) {
-    //   throw new Error("contraseña incorrecta");
-    // }
+    if (!auth) {
+      throw new Error("contraseña incorrecta");
+    }
     const id = Number(auth.get("user_id"));
     const user = await User.findByPk(id);
     const token = jwt.sign(user["dataValues"], "estoesunsecreto");
@@ -52,5 +53,19 @@ export class AuthController {
       },
     });
     return auth;
+  }
+
+  async updatePasswordUser(id, password) {
+    // const passwordHash = this.getSHA256ofString(password);
+    try {
+      const auth = await Auth.update(password, {
+        where: {
+          id: id,
+        },
+      });
+      return;
+    } catch (error) {
+      return new Error("No pudimos actualizar el password");
+    }
   }
 }

@@ -30,13 +30,12 @@ export function header() {
         </div>
       ${this.getStyles()}`;
         this.shadowRoot.appendChild(div);
-        
-        
+
         const goToHome = this.shadowRoot.querySelector(".logo");
         goToHome.addEventListener("click", () => {
           location.pathname = "home";
         });
-        
+
         const goToLogin = this.shadowRoot.querySelector(".goto-login");
         goToLogin.addEventListener("click", () => {
           location.pathname = "login";
@@ -91,10 +90,11 @@ export function header() {
         //   nameUser.textContent = `${stateLocal.fullname}`;
         // }
 
-        // const closeSession = this.shadowRoot.querySelector(".close-session");
-        // closeSession.addEventListener("click", () => {
-        //   mainState.logOut();
-        // });
+        const closeSession = this.shadowRoot.querySelector(".close-session");
+        closeSession.addEventListener("click", () => {
+          mainState.logOut();
+          return (location.pathname = "welcome");
+        });
 
         const openMenu = this.shadowRoot.querySelector(".derecha");
         const closeMenu = this.shadowRoot.querySelector(".modal-close");
@@ -143,7 +143,7 @@ export function header() {
                   left: 0px;
                   right: 0px;
                   bottom: 0px;
-                  background-color: #F5B7B1;
+                  background-color: #FFE082;
                   font-size: 40px;
                   font-weight: bold;
                   padding: 80px;

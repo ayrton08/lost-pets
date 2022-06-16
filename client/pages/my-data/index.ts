@@ -6,7 +6,7 @@ export function myDataPage(params) {
   div.className = "contenedor";
   div.innerHTML = `
     <comp-header></comp-header>  
-    <div class="content-home">
+    <div class="content-data">
       <span class="title-welcome">Mis Datos</span>
     <form class="my-data-form">
       <label>
@@ -16,11 +16,11 @@ export function myDataPage(params) {
 
       <label class="container-password">
         <h3>Password</h3>
-        <input type="password" name="password" class="password-first"/>
+        <input type="password" name="password" class="password-first" placeholder="Nueva contraseña"/>
       </label>
       <label >
         <h3>Repeat Password</h3>
-        <input type="password" name="password-repeat" class="password-second"/>
+        <input type="password" name="password-repeat" class="password-second" placeholder="Repita la contraseña"/>
       </label>
 
       <button class="save-data">Guardar</button>
@@ -30,23 +30,29 @@ export function myDataPage(params) {
     `;
   (async function () {
     const state = await mainState.myData();
-
     const name = document.querySelector(".fullname");
     name["value"] = state.fullname;
     const passwordFirst = document.querySelector(".password-first");
-    passwordFirst["value"] = "solorelleno";
     const passwordSecond = document.querySelector(".password-second");
-    passwordSecond["value"] = "solorelleno";
 
     const saveData = document.querySelector(".save-data");
     saveData.addEventListener("click", (e) => {
       e.preventDefault();
-      let name = document.querySelector(".fullname");
-      let password = document.querySelector(".password-first");
-      let passwordSecond = document.querySelector(".password-second");
+      const fullnameEl = document.querySelector(".fullname");
+      const newFullName = fullnameEl["value"];
+      const passwordEl = document.querySelector(".password-first");
+      const newPassword = fullnameEl["value"];
+      const passwordSecond = document.querySelector(".password-second");
 
-      if (name["value"] != state.fullname ) {
-        console.log("el nombre cambio");
+      if (name["value"] != state.fullname) {
+        console.log("el nombre cambio", name["value"]);
+
+        const newData = mainState.updateDataUser(newFullName);
+      }
+      if (passwordFirst["value"] === passwordSecond["value"]) {
+        console.log("el password cambio");
+
+        const newData = mainState.updateDataUser(newPassword);
       }
     });
   })();

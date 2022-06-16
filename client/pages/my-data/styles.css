@@ -19,3 +19,13 @@ body {
   max-width: 150px;
   margin: 20px;
 }
+
+.content-data {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px 0px 50px;
+  text-align: center;
+  gap: 20px;
+  background-color: #2ecc71;
+  height: 100vh;
+}

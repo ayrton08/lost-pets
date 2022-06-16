@@ -4,21 +4,23 @@ import { config } from "../../config";
 const API_BASE_URL = "http://localhost:3000/api/v1";
 export function homePage(params) {
   const div = document.createElement("div");
+
+  const login = localStorage.getItem("token");
+  if (!login) {
+    div.innerHTML = `
+      <span>¡No estas logeado!</span>
+
+    `;
+  }
   div.className = "contenedor";
   div.innerHTML = `
     <comp-header></comp-header>
     <div class="content-home">
       <span class="title-welcome">Mascotas perdidas cerca tuyo</span>
-      <div>Aqui van las tarjetitas de las mascotas encontradas</div>
       <div class="services-section-two"></div>
+      <div class="form-info"><div>
     </div>
-    <template id="portfolio-template">
-            <div class="pets-card">
-                <img class="logo-section-two" style="width: 200px;" />
-                <span class="title"></span>
-                <a class="informacion"></a>
-            </div>
-    </template>
+    
     `;
 
   const state = mainState.getState();
@@ -27,26 +29,51 @@ export function homePage(params) {
     state.myData.location.lng = position.coords.longitude;
     mainState.setState(state);
 
-    getDataPets().then((data) => {
+    getDataPets().then(async (data) => {
+      // console.log(data);
       for (const c of data) {
-        console.log(c);
         addPetCard(c);
       }
     });
   });
 
   function addPetCard(params = {}) {
-    const template = document.querySelector("#portfolio-template");
-    const container = document.querySelector(".services-section-two");
+    const cardDiv = document.createElement("div");
+    cardDiv.className = "pets-card";
+    cardDiv.innerHTML = `
+        <div>
+                <img class="logo-section-two" style="width: 100%;" src='${params["pictureURL"]}' />
+                <span class="title-name">Nombre: ${params["name"]} <span class="title"></span></span>
+                <a id='${params["objectID"]}'>Reportar</a>
+        </div>`;
 
-    template["content"].querySelector(".logo-section-two").src =
-      params["pictureURL"];
-    template["content"].querySelector(".title").textContent = params["name"];
-    template["content"].querySelector(".informacion").textContent =
-      "Reportar Informacion";
+    cardDiv.addEventListener("click", async () => {
+      const id = Number(`${params["objectID"]}`);
+      const search = await mainState.findById(id);
+      const formInfo = document.querySelector(".form-info")
+      formInfo.innerHTML = `
+        <form class="form-report">
+            <label>
+              <h3>Tu Nombre</h3>
+              <input type="text" name="email" class="input-email" placeholder="Your Name" />
+            </label>
+            <label class="container-password">
+              <h3>Tu Telefono</h3>
+              <input type="text" name="password" class="password-first" placeholder="Your Cellphone" />
+            </label>
+            <label>
+                <h2>¿Donde lo viste?</h2>
+                <textarea name="last-place" class="last-place"></textarea>
+            </label>
+            <br>
+            <button>Enviar</button>
+        </form>
+      `;
+      console.log("state home", state);
+    });
 
-    const clone = document.importNode(template["content"], true);
-    container.appendChild(clone);
+    const divNew = document.querySelector(".content-home");
+    divNew.appendChild(cardDiv);
   }
 
   async function getDataPets() {

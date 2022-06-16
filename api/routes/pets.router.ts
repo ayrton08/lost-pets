@@ -20,7 +20,7 @@ router.get("/find-by-location", async (req, res, next) => {
   const { lat, lng } = req.query;
   try {
     const rta = await petsController.findClose(lat, lng);
-    res.json(rta);
+    return res.json(rta);
   } catch (error) {
     next(error);
   }
@@ -65,7 +65,18 @@ router.patch("/update/:id", async (req, res) => {
   });
   const indexItem = petsController.bodyToIndex(req.body, id);
   const algoliaRes = await index.partialUpdateObject(indexItem);
-  res.json(pet);
+  return res.json(pet);
+});
+
+router.get("/by-id/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("id", id);
+  const pet = await Pets.findOne({
+    where: {
+      id: id,
+    },
+  });
+  return res.json(pet);
 });
 
 export default router;

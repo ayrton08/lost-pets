@@ -27,11 +27,10 @@ export function reportPet() {
               <input type="text" name="raza" class="raza" placeholder="Raza" />
             </label>
               <div class="profile-picture-container">
-                <span class="logo-pic">📸</span>
-                <h3 class="subtitle">Arraste su foto aqui</h3>
+                <h3 class="subtitle">Arraste su foto aqui 📸</h3>
               </div>
               <span class="instructions-search">
-                Buscá un punto de referencia para reportar a tu mascota. Puede ser una dirección, un barrio o una ciudad.
+                Por defecto se reportara la ubicación en la que se encuentra, si desea indicar otra ubicacion en el reporte puede hacerlo en el mapa abajo.
               </span>
               <button class="send-form">Reportar como Perdido</button>
               </form>
@@ -77,6 +76,9 @@ export function reportPet() {
         e.preventDefault();
         const name = e.target["name"].value;
         const raza = e.target["raza"].value;
+        if (name === "" || raza === "") {
+          return alert("Faltan datos de la mascota reportada");
+        }
         const data = {
           name,
           raza,
@@ -86,7 +88,11 @@ export function reportPet() {
           state: true,
         };
         const res = await mainState.doReport(data, token);
-        return location.pathname = "my-reports"
+        return (location.pathname = "my-reports");
+      });
+      const cancel = this.shadowRoot.querySelector(".button-cancelar");
+      cancel.addEventListener("click", () => {
+        return (location.pathname = "home");
       });
     }
     getStyles() {
@@ -120,12 +126,11 @@ export function reportPet() {
                   min-width:200px;
                   min-height: 150px;
                   background-color: #E5E8E8;
+                  
 
                 }
 
-                .logo-pic{
-                  font-size: 100px;
-                }
+                
                 
                 .subtitle{
                   margin: 0px;
@@ -137,15 +142,18 @@ export function reportPet() {
 
                 .button-cancelar{
                   margin:15px;
-                  background-color: red;
+                  background-color: #E74C3C;
                   min-width:100px;
                   min-height: 40px;
+                  border-radius: 5px;
                 }
 
                 .send-form{
-                  background-color: green;
+                  background-color: #43A047;
                   min-width:100px;
                   min-height: 40px;
+                  border-radius: 5px;
+
                 }
                </style>
                 `;

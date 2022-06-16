@@ -1,4 +1,4 @@
-import { User } from "../models";
+import { Auth, User } from "../models";
 import { Pets } from "../models";
 
 export class UserController {
@@ -32,5 +32,17 @@ export class UserController {
     }
   }
 
+  async updateNameUser(id, fullname) {
+    try {
+      const user = await User.update(fullname, {
+        where: {
+          id: id,
+        },
+      });
+      return;
+    } catch (error) {
+      return new Error("No pudimos actualizar el nombre");
+    }
+  }
   
 }

@@ -24,15 +24,22 @@ router.post("/", async (req, res, next) => {
 
 router.patch("/update", authController.authMiddleware, async (req, res) => {
   const { id } = req["_user"];
+  console.log("body", req.body);
   if (!id) {
     return res.json({ error: "Falta el userId" });
   }
-  const user = await User.update(req.body, {
-    where: {
-      id: id,
-    },
-  });
-  return res.json(user);
+  if (req.body.fullname) {
+    const newName = userController.updateNameUser(id, req.body.fullname);
+    return newName;
+  }
+  if (req.body.password) {
+    const newPassword = authController.updatePasswordUser(
+      id,
+      req.body.password
+    );
+    return newPassword;
+  }
+  return res.json("status: ok");
 });
 
 router.get("/my-pets", authController.authMiddleware, async (req, res) => {
