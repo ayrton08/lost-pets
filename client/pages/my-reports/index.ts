@@ -13,7 +13,7 @@ export function myReportsPage(params) {
     </div>
     <template id="portfolio-template">
             <div class="pets-card">
-                <img class="logo-section-two" style="max-width:200px;" />
+                <img class="logo-section-two" style="width:100%;" />
                 <span class="title"></span>
                 <a class="informacion"></a>
             </div>
@@ -35,7 +35,7 @@ export function myReportsPage(params) {
       params["pictureURL"];
     template["content"].querySelector(".title").textContent = params["name"];
     template["content"].querySelector(".informacion").textContent =
-      "Reportar Informacion";
+      "Editar";
 
     const clone = document.importNode(template["content"], true);
     container.appendChild(clone);

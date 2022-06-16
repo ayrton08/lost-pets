@@ -33,7 +33,7 @@ export function formLogin() {
                   </label>
                   <label class="container-password">
                     <h3>Password</h3>
-                    <input type="text" name="password" class="password-first" placeholder="Your Password" />
+                    <input type="password" name="password" class="password-first" placeholder="Your Password" />
                     <div class="password-validator"></div>
                   </label>
                   <button class="button-login">Login</button>
