@@ -147,7 +147,9 @@ export function header() {
                   font-size: 40px;
                   font-weight: bold;
                   padding: 80px;
+                  opacity: 0.9;
                   display: none;
+                  
                 }
 
                 .menu-items {

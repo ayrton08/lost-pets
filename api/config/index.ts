@@ -16,5 +16,5 @@ export const config = {
   mapboxToken: process.env.MAPBOX_TOKEN,
   secretValidator: process.env.SECRET_VALIDATOR,
   apiUrl: process.env.API_BASE_URL,
-
+  sendGrid: process.env.SENDGRID_API_KEY,
 };

@@ -50,4 +50,19 @@ router.get("/my-pets", authController.authMiddleware, async (req, res) => {
   const petsOfUser = await userController.findAllPetsOfUser(id);
   return res.json(petsOfUser);
 });
+
+router.post("/info-pet", async (req, res) => {
+  console.log(req.body);
+  if (!req.body) {
+    return res.status(401).json("Faltan datos en el reporte");
+  }
+  const { emailOwner, title, message, cellphone, fullname } = req.body;
+  const info = {
+    message,
+    cellphone,
+    fullname,
+  };
+  const sendEmail = await userController.sendEmail(emailOwner, title, info);
+  return res.json({ email: "enviado" });
+});
 export default router;

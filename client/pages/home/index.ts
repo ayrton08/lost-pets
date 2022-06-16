@@ -5,23 +5,23 @@ const API_BASE_URL = "http://localhost:3000/api/v1";
 export function homePage(params) {
   const div = document.createElement("div");
 
-  const login = localStorage.getItem("token");
-  if (!login) {
-    div.innerHTML = `
-      <span>¡No estas logeado!</span>
-
-    `;
-  }
+  
   div.className = "contenedor";
   div.innerHTML = `
     <comp-header></comp-header>
     <div class="content-home">
       <span class="title-welcome">Mascotas perdidas cerca tuyo</span>
+      <button class="see-map">See on map 🗺️</button>
       <div class="services-section-two"></div>
       <div class="form-info"><div>
     </div>
     
     `;
+
+  const goToMap = div.querySelector(".see-map")
+  goToMap.addEventListener("click",()=>{
+    return location.pathname = "view-report"
+  })
 
   const state = mainState.getState();
   navigator.geolocation.getCurrentPosition((position) => {
@@ -70,11 +70,11 @@ export function homePage(params) {
             <img class="card-info-pic" src="${search.pictureURL}"></img>
             <label>
               <span>Tu Nombre</span>
-              <input type="text" name="email" class="input-email" placeholder="Your Name" />
+              <input type="text" name="fullname" class="input-email" placeholder="Your Name" />
             </label>
-            <label class="container-password">
+            <label class="container-cellphone">
               <span>Tu Telefono</span>
-              <input type="text" name="password" class="password-first" placeholder="Your Cellphone" />
+              <input type="text" name="cellphone" class="password-first" placeholder="Your Cellphone" />
             </label>
             <label class="textarea-last-place">
                 <span>¿Donde lo viste?</span>
@@ -85,6 +85,22 @@ export function homePage(params) {
         </form>
         
       `;
+      const formSend = document.querySelector(".form-report");
+      formSend.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = {
+          fullname: formSend["fullname"].value,
+          cellphone: formSend["cellphone"].value,
+          message: formSend["last-place"].value,
+          title: search.name,
+          emailOwner: search.email,
+        };
+        const state = await mainState.sendInfoPet(data);
+
+        formInfo.innerHTML = `
+          <div class="report-send">¡Reporte enviado con exito! ✅</div>
+          `;
+      });
 
       const buttonClose = document.querySelector(".close-report");
       buttonClose.addEventListener("click", () => {

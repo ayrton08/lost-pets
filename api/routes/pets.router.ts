@@ -1,6 +1,6 @@
 import * as express from "express";
 import { index } from "../lib/algolia";
-import { Pets } from "../models";
+import { Pets, User } from "../models";
 import { PetsController } from "../controllers/pets-controllers";
 import { AuthController } from "../controllers/auth-controllers";
 const authControllers = new AuthController();
@@ -70,13 +70,19 @@ router.patch("/update/:id", async (req, res) => {
 
 router.get("/by-id/:id", async (req, res) => {
   const { id } = req.params;
-  console.log("id", id);
   const pet = await Pets.findOne({
     where: {
       id: id,
     },
   });
-  return res.json(pet);
+  const userId = pet["user_id"];
+  const user = await User.findByPk(userId);
+  const emailUser = user["dataValues"]["email"];
+  const rta = {
+    ...pet["dataValues"],
+    email: emailUser,
+  };
+  return res.json(rta);
 });
 
 export default router;

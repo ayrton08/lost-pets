@@ -18,7 +18,7 @@ export function formLogin() {
       const stateLogin = localStorage.getItem("token");
       if (stateLogin) {
         setTimeout(() => {
-          div.textContent = `Regirigiendo... 🕒`;
+          div.innerHTML = `Regirigiendo... 🕒`;
         }, 5000);
         return (location.pathname = "home");
       }
@@ -36,7 +36,7 @@ export function formLogin() {
                     <input type="text" name="password" class="password-first" placeholder="Your Password" />
                     <div class="password-validator"></div>
                   </label>
-                  <button>Login</button>
+                  <button class="button-login">Login</button>
               </form>
           </div>
                   ${this.getStyles()}    
@@ -79,12 +79,37 @@ export function formLogin() {
                 background-color: #F9E79F;
                 justify-content: center;
                 align-items: center;
-                border: solid 2px;
-                gap: 10px;
+                border-radius: 5px;
+                gap: 30px;
                 padding: 20px;
-                width: 100%;
-              },
+                margin: 60px;
+                
+              }
               
+              .button-login{
+                width: 80px;
+                height: 50px;
+                font-size: 20px;
+                border-radius: 5px;
+                background-color: chartreuse;
+              }
+
+              .password-validator{
+                text-align: center;
+              }
+
+              .input-email{
+                width: 230px;
+                height: 40px;
+                font-size: 20px;
+                
+              }
+              
+              .password-first{
+                width: 230px;
+                height: 40px;
+                font-size: 20px;
+              }
              </style>
               `;
     }

@@ -44,8 +44,8 @@ body {
 }
 
 .abre-ventana {
-    max-width: 54px;
-    max-height: 50px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
 }
 
@@ -111,16 +111,11 @@ body {
 }
 
 button {
-    box-sizing: border-box;
     color: #f2f3f4;
     background-color: black;
-    min-height: 60px;
-    min-width: 65px;
-    font-size: 35px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-
-
 
 }

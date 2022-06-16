@@ -141,6 +141,18 @@ const mainState = {
     return pet;
   },
 
+  async sendInfoPet(params: {}) {
+    const res = await fetch(`${API_BASE_URL}/users/info-pet`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params)
+    });
+    const data = await res.json();
+    return data;
+  },
+
   setState(newState) {
     this.data = newState;
     for (const cb of this.listeners) {

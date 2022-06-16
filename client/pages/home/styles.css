@@ -49,8 +49,6 @@ body {
   cursor: pointer;
 }
 
-
-
 .card-info-pic {
   max-width: 200px;
 }
@@ -67,23 +65,30 @@ body {
   font-size: 20px;
 }
 
-.textarea-last-place{
+.textarea-last-place {
   display: flex;
   flex-direction: column;
 }
 
-.last-place{
+.last-place {
   width: 250px;
   height: 100px;
 }
 
-.name-pet{
+.name-pet {
   font-size: 50px;
   color: darkmagenta;
   font-weight: bold;
 }
 
-.time-report{
-  
+.time-report {
   color: blue;
+}
+
+.report-send {
+  font-size: 23px;
+  color: #006633;
+  font-weight: bold;
+  background-color: #F9A825;
+  border-radius: 5px;
 }

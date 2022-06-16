@@ -12,7 +12,7 @@ body {
 
 .title-main {
   font-size: 50px;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .contenedor {
@@ -25,7 +25,7 @@ body {
   padding: 50px 50px 50px 50px;
   text-align: center;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
   background-color: #5dade2;
   height: 100vh;
 }
@@ -43,16 +43,21 @@ body {
 
 .button-login {
   border-radius: 5px;
-  width: 60%;
   height: 40px;
   background-color: #9ccc65;
   margin: 20px;
+  color: black;
+  width: 150px;
 }
 
 .button-register {
+  color: black;
+  width: 150px;
   border-radius: 5px;
   margin: 20px;
-  width: 60%;
   height: 40px;
   background-color: #9ccc65;
+  
 }
+
+
