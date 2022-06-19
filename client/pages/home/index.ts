@@ -6,7 +6,7 @@ export function homePage(params) {
   const div = document.createElement("div");
 
   
-  div.className = "contenedor";
+  div.className = "contenedor-home";
   div.innerHTML = `
     <comp-header></comp-header>
     <div class="content-home">

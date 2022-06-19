@@ -10,7 +10,7 @@ body {
   font-size: 40px;
 }
 
-.contenedor {
+.contenedor-home {
   display: flex;
   flex-direction: column;
 }
@@ -21,7 +21,6 @@ body {
   text-align: center;
   gap: 20px;
   background-color: #2ecc71;
-  height: 100%;
 }
 
 .pets-card {
@@ -91,4 +90,7 @@ body {
   font-weight: bold;
   background-color: #F9A825;
   border-radius: 5px;
+}
+#map{
+  display: none;
 }

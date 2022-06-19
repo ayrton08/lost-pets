@@ -4,10 +4,10 @@ import { config } from "../../config";
 const API_BASE_URL = "http://localhost:3000/api/v1";
 export function myReportsPage(params) {
   const div = document.createElement("div");
-  div.className = "contenedor";
+  div.className = "contenedor-my-reports";
   div.innerHTML = `
     <comp-header></comp-header>
-    <div class="content-home">
+    <div class="content-reports">
       <span class="title-welcome">Mis Mascotas Reportadas</span>
       <div class="services-section-two"></div>
     </div>

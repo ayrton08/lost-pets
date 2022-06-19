@@ -41,22 +41,22 @@ export function formRegister() {
                 ${this.getStyles()}    
             `;
 
-      // const showPassword = document.querySelector(".show-password");
-      // console.log(showPassword)
-      // showPassword.addEventListener("click", () => {
-      //   const passwordOne = document.querySelector(".password-first");
-      //   const passwordTwo = document.querySelector(".password-second");
-      //   if (
-      //     passwordOne["type"] === "password" &&
-      //     passwordTwo["type"] === "password"
-      //   ) {
-      //     passwordOne["type"] = "text";
-      //     passwordTwo["type"] = "text";
-      //   } else {
-      //     passwordOne["type"] = "password";
-      //     passwordTwo["type"] = "password";
-      //   }
-      // });
+      const showPassword = div.querySelector(".show-password");
+      showPassword.addEventListener("click", (e) => {
+        e.preventDefault()
+        const passwordOne = div.querySelector(".password-first");
+        const passwordTwo = div.querySelector(".password-second");
+        if (
+          passwordOne["type"] === "password" &&
+          passwordTwo["type"] === "password"
+        ) {
+          passwordOne["type"] = "text";
+          passwordTwo["type"] = "text";
+        } else {
+          passwordOne["type"] = "password";
+          passwordTwo["type"] = "password";
+        }
+      });
 
       const formRegister = document.querySelector("form-register");
 

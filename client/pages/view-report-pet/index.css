@@ -16,10 +16,6 @@ body {
   height: 100%;
 }
 
-html {
-  height: 100%;
-}
-
 .mapa {
   margin: 50px;
 }
@@ -29,9 +25,7 @@ html {
   border: solid 1px blueviolet;
 }
 
-.contenedor {
-  background-color: #FFA000;
-}
+
 
 .marker {
   display: block;

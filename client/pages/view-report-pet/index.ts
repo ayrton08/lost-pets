@@ -6,10 +6,8 @@ const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
 
 export function reportPage(params?) {
   const div = document.createElement("div");
-  div.className = "contenedor";
   div.innerHTML = `
     <comp-header></comp-header>
-    <div id="map" style="width: 100%; height: 100%"></div>
     `;
 
   const mapa = document.querySelector(".search-form");
@@ -85,7 +83,6 @@ export function reportPage(params?) {
           let width = 60;
           let height = 60;
           for (const pet of results) {
-            
             const lat = pet._geoloc.lat;
             const lng = pet._geoloc.lng;
             const newPet = {

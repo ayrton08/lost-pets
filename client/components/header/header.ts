@@ -101,6 +101,10 @@ export function header() {
         openMenu.addEventListener("click", () => {
           const container = this.shadowRoot.querySelector(".menu-modal");
           container["style"].display = "flex";
+          if(location.pathname.includes("view-reports")){
+            const mapa = document.querySelector(".mapboxgl-canvas");
+            mapa["style"].display = "none";
+          }
         });
         closeMenu.addEventListener("click", () => {
           const container = this.shadowRoot.querySelector(".menu-modal");
@@ -119,6 +123,9 @@ export function header() {
         myReports.addEventListener("click", () => {
           location.pathname = "my-reports";
         });
+
+
+        
       }
     }
     getStyles() {
