@@ -1,18 +1,19 @@
 import { mainState } from "../../state";
-export function header() {
-  class Header extends HTMLElement {
-    constructor() {
-      super();
-    }
-    connectedCallback() {
-      this.render();
-    }
-    render() {
-      this.attachShadow({ mode: "open" });
-      const div = document.createElement("header");
-      const stateLocal = localStorage.getItem("token");
-      if (!stateLocal) {
-        div.innerHTML = `
+import { Router } from "@vaadin/router";
+
+class Header extends HTMLElement {
+  constructor() {
+    super();
+  }
+  connectedCallback() {
+    this.render();
+  }
+  render() {
+    this.attachShadow({ mode: "open" });
+    const div = document.createElement("header");
+    const stateLocal = localStorage.getItem("token");
+    if (!stateLocal) {
+      div.innerHTML = `
         <div class="container-header">
         <div class="izquierda">
           <a>
@@ -29,36 +30,36 @@ export function header() {
           <a class="goto-register">Creat an account</a>
         </div>
       ${this.getStyles()}`;
-        this.shadowRoot.appendChild(div);
+      this.shadowRoot.appendChild(div);
 
-        const goToHome = this.shadowRoot.querySelector(".logo");
-        goToHome.addEventListener("click", () => {
-          location.pathname = "home";
-        });
+      const goToHome = this.shadowRoot.querySelector(".logo");
+      goToHome.addEventListener("click", () => {
+        Router.go("/home");
+      });
 
-        const goToLogin = this.shadowRoot.querySelector(".goto-login");
-        goToLogin.addEventListener("click", () => {
-          location.pathname = "login";
-        });
+      const goToLogin = this.shadowRoot.querySelector(".goto-login");
+      goToLogin.addEventListener("click", () => {
+        Router.go("/login");
+      });
 
-        const goToRegister = this.shadowRoot.querySelector(".goto-register");
-        goToRegister.addEventListener("click", () => {
-          location.pathname = "register";
-        });
+      const goToRegister = this.shadowRoot.querySelector(".goto-register");
+      goToRegister.addEventListener("click", () => {
+        Router.go("/register");
+      });
 
-        const openMenu = this.shadowRoot.querySelector(".abre-ventana");
-        const closeMenu = this.shadowRoot.querySelector(".modal-close");
-        openMenu.addEventListener("click", () => {
-          const container = this.shadowRoot.querySelector(".menu-modal");
-          container["style"].display = "flex";
-        });
-        closeMenu.addEventListener("click", () => {
-          const container = this.shadowRoot.querySelector(".menu-modal");
-          container["style"].display = "none";
-        });
-        return;
-      } else {
-        div.innerHTML = `
+      const openMenu = this.shadowRoot.querySelector(".abre-ventana");
+      const closeMenu = this.shadowRoot.querySelector(".modal-close");
+      openMenu.addEventListener("click", () => {
+        const container = this.shadowRoot.querySelector(".menu-modal");
+        container["style"].display = "flex";
+      });
+      closeMenu.addEventListener("click", () => {
+        const container = this.shadowRoot.querySelector(".menu-modal");
+        container["style"].display = "none";
+      });
+      return;
+    } else {
+      div.innerHTML = `
         <div class="container-header">
           <div class="izquierda">
             <a class="button-home">
@@ -83,53 +84,50 @@ export function header() {
           </div>
         </div>
       ${this.getStyles()}`;
-        this.shadowRoot.appendChild(div);
+      this.shadowRoot.appendChild(div);
 
-        const nameUser = this.shadowRoot.querySelector(".name-user");
-        // if (stateLocal.fullname) {
-        //   nameUser.textContent = `${stateLocal.fullname}`;
-        // }
+      const nameUser = this.shadowRoot.querySelector(".name-user");
+      // if (stateLocal.fullname) {
+      //   nameUser.textContent = `${stateLocal.fullname}`;
+      // }
 
-        const closeSession = this.shadowRoot.querySelector(".close-session");
-        closeSession.addEventListener("click", () => {
-          mainState.logOut();
-          return (location.pathname = "welcome");
-        });
+      const closeSession = this.shadowRoot.querySelector(".close-session");
+      closeSession.addEventListener("click", () => {
+        mainState.logOut();
+        return Router.go("/welcome");
+      });
 
-        const openMenu = this.shadowRoot.querySelector(".derecha");
-        const closeMenu = this.shadowRoot.querySelector(".modal-close");
-        openMenu.addEventListener("click", () => {
-          const container = this.shadowRoot.querySelector(".menu-modal");
-          container["style"].display = "flex";
-          if(location.pathname.includes("view-reports")){
-            const mapa = document.querySelector(".mapboxgl-canvas");
-            mapa["style"].display = "none";
-          }
-        });
-        closeMenu.addEventListener("click", () => {
-          const container = this.shadowRoot.querySelector(".menu-modal");
-          container["style"].display = "none";
-        });
+      const openMenu = this.shadowRoot.querySelector(".derecha");
+      const closeMenu = this.shadowRoot.querySelector(".modal-close");
+      openMenu.addEventListener("click", () => {
+        const container = this.shadowRoot.querySelector(".menu-modal");
+        container["style"].display = "flex";
+        if (location.pathname.includes("view-reports")) {
+          const mapa = document.querySelector(".mapboxgl-canvas");
+          mapa["style"].display = "none";
+        }
+      });
+      closeMenu.addEventListener("click", () => {
+        const container = this.shadowRoot.querySelector(".menu-modal");
+        container["style"].display = "none";
+      });
 
-        const myData = this.shadowRoot.querySelector(".my-data");
-        myData.addEventListener("click", () => {
-          location.pathname = "my-data";
-        });
-        const doReport = this.shadowRoot.querySelector(".do-report");
-        doReport.addEventListener("click", () => {
-          location.pathname = "do-report";
-        });
-        const myReports = this.shadowRoot.querySelector(".my-reports");
-        myReports.addEventListener("click", () => {
-          location.pathname = "my-reports";
-        });
-
-
-        
-      }
+      const myData = this.shadowRoot.querySelector(".my-data");
+      myData.addEventListener("click", () => {
+        Router.go("/my-data");
+      });
+      const doReport = this.shadowRoot.querySelector(".do-report");
+      doReport.addEventListener("click", () => {
+        Router.go("/do-report");
+      });
+      const myReports = this.shadowRoot.querySelector(".my-reports");
+      myReports.addEventListener("click", () => {
+        Router.go("/my-reports");
+      });
     }
-    getStyles() {
-      return `
+  }
+  getStyles() {
+    return `
                 <style>
                 .container-header {
                   display: flex;
@@ -180,7 +178,6 @@ export function header() {
                 }
                </style>
                 `;
-    }
   }
-  customElements.define("comp-header", Header);
 }
+customElements.define("comp-header", Header);
