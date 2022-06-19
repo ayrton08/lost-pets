@@ -1,29 +1,30 @@
 import * as jwt from "jsonwebtoken";
+import { Router } from "@vaadin/router";
+
 import { mainState } from "../state";
-export function formLogin() {
-  class FormLogin extends HTMLElement {
-    constructor() {
-      super();
+class FormLogin extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    this.attachShadow({ mode: "open" });
+    const div = document.createElement("div");
+    div.className = "root";
+
+    const stateLogin = localStorage.getItem("token");
+    if (stateLogin) {
+      setTimeout(() => {
+        div.innerHTML = `Regirigiendo... 🕒`;
+      }, 5000);
+      return Router.go("/home");
     }
 
-    connectedCallback() {
-      this.render();
-    }
-
-    render() {
-      this.attachShadow({ mode: "open" });
-      const div = document.createElement("div");
-      div.className = "root";
-
-      const stateLogin = localStorage.getItem("token");
-      if (stateLogin) {
-        setTimeout(() => {
-          div.innerHTML = `Regirigiendo... 🕒`;
-        }, 5000);
-        return (location.pathname = "home");
-      }
-
-      div.innerHTML = `
+    div.innerHTML = `
        
         <div>
               <form class="form-login">
@@ -41,37 +42,37 @@ export function formLogin() {
           </div>
                   ${this.getStyles()}    
               `;
-      this.shadowRoot.appendChild(div);
-      const state = mainState.getState();
-      const formLogin = this.shadowRoot.querySelector(".form-login");
-      const valid = this.shadowRoot.querySelector(".password-validator");
+    this.shadowRoot.appendChild(div);
+    const state = mainState.getState();
+    const formLogin = this.shadowRoot.querySelector(".form-login");
+    const valid = this.shadowRoot.querySelector(".password-validator");
 
-      formLogin.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        valid["style"].fontSize = "30px";
-        valid.textContent = "⌛";
+    formLogin.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      valid["style"].fontSize = "30px";
+      valid.textContent = "⌛";
 
-        const email = e.target["email"].value;
-        const password = e.target["password"].value;
-        const login = await mainState.login(email, password);
+      const email = e.target["email"].value;
+      const password = e.target["password"].value;
+      const login = await mainState.login(email, password);
 
-        if (state.myData.login) {
-          try {
-            valid["style"].color = "green";
-            valid.textContent = "Login exitoso ✅";
-            mainState.setToken(login);
-            return (location.pathname = "home");
-          } catch (error) {
-            valid["style"].color = "red";
-            valid["style"].fontSize = "20px";
-            valid.textContent = "Email o contraseña incorrecta ❌";
-            console.error(error);
-          }
+      if (state.myData.login) {
+        try {
+          valid["style"].color = "green";
+          valid.textContent = "Login exitoso ✅";
+          mainState.setToken(login);
+          return Router.go("/home");
+        } catch (error) {
+          valid["style"].color = "red";
+          valid["style"].fontSize = "20px";
+          valid.textContent = "Email o contraseña incorrecta ❌";
+          console.error(error);
         }
-      });
-    }
-    getStyles() {
-      return `
+      }
+    });
+  }
+  getStyles() {
+    return `
               <style>
               .form-login{
                 display: flex;
@@ -112,7 +113,6 @@ export function formLogin() {
               }
              </style>
               `;
-    }
   }
-  customElements.define("form-login", FormLogin);
 }
+customElements.define("form-login", FormLogin);

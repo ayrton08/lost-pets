@@ -2,21 +2,20 @@ import { mainState } from "../state";
 import Dropzone from "dropzone";
 import { map } from "./mapa";
 
-export function reportPet() {
-  class ReportPet extends HTMLElement {
-    constructor() {
-      super();
-    }
+class ReportPet extends HTMLElement {
+  constructor() {
+    super();
+  }
 
-    connectedCallback() {
-      this.render();
-    }
+  connectedCallback() {
+    this.render();
+  }
 
-    render() {
-      this.attachShadow({ mode: "open" });
-      const div = document.createElement("div");
-      div.className = "container-report";
-      div.innerHTML = `
+  render() {
+    this.attachShadow({ mode: "open" });
+    const div = document.createElement("div");
+    div.className = "container-report";
+    div.innerHTML = `
         <form class="form-report">
             <label>
               <h3 class="subtitle">Nombre</h3>
@@ -36,67 +35,65 @@ export function reportPet() {
               </form>
               <button class="button-cancelar">Cancelar</button>
           ${this.getStyles()}`;
-      this.shadowRoot.appendChild(div);
+    this.shadowRoot.appendChild(div);
 
-      const body = document.querySelector("body");
-      const searchMap = document.querySelector(".search-form");
-      const mapa = document.querySelector(".mapboxgl-map");
+    const body = document.querySelector("body");
+    const searchMap = document.querySelector(".search-form");
+    const mapa = document.querySelector(".mapboxgl-map");
 
-      if (location.pathname.includes("do-report")) {
-        body["style"].backgroundColor = "#CFD8DC";
-        searchMap["style"].display = "inherit";
-        mapa["style"].overflow = "inherit";
-      }
-
-      const token = localStorage.getItem("token");
-
-      const form = this.shadowRoot.querySelector(".form-report");
-      const profile = this.shadowRoot.querySelector(
-        ".profile-picture-container"
-      );
-      let imageDataURL;
-
-      const myDropzone = new Dropzone(profile, {
-        url: "/falsa",
-        autoProcessQueue: false,
-        clickable: true,
-      });
-      myDropzone.on("addedfile", function (file) {
-        // usando este evento pueden acceder al dataURL directamente
-        imageDataURL = file;
-      });
-      const state = mainState.getState();
-      navigator.geolocation.getCurrentPosition((position) => {
-        state.myData.location.lat = position.coords.latitude;
-        state.myData.location.lng = position.coords.longitude;
-        mainState.setState(state);
-      });
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const name = e.target["name"].value;
-        const raza = e.target["raza"].value;
-        if (name === "" || raza === "") {
-          return alert("Faltan datos de la mascota reportada");
-        }
-        const data = {
-          name,
-          raza,
-          pictureURL: imageDataURL.dataURL,
-          lat: state.myData.location.lat,
-          lng: state.myData.location.lng,
-          state: true,
-        };
-        const res = await mainState.doReport(data, token);
-        return (location.pathname = "my-reports");
-      });
-      const cancel = this.shadowRoot.querySelector(".button-cancelar");
-      cancel.addEventListener("click", () => {
-        return (location.pathname = "home");
-      });
+    if (location.pathname.includes("do-report")) {
+      body["style"].backgroundColor = "#CFD8DC";
+      searchMap["style"].display = "inherit";
+      mapa["style"].overflow = "inherit";
     }
-    getStyles() {
-      return `
+
+    const token = localStorage.getItem("token");
+
+    const form = this.shadowRoot.querySelector(".form-report");
+    const profile = this.shadowRoot.querySelector(".profile-picture-container");
+    let imageDataURL;
+
+    const myDropzone = new Dropzone(profile, {
+      url: "/falsa",
+      autoProcessQueue: false,
+      clickable: true,
+    });
+    myDropzone.on("addedfile", function (file) {
+      // usando este evento pueden acceder al dataURL directamente
+      imageDataURL = file;
+    });
+    const state = mainState.getState();
+    navigator.geolocation.getCurrentPosition((position) => {
+      state.myData.location.lat = position.coords.latitude;
+      state.myData.location.lng = position.coords.longitude;
+      mainState.setState(state);
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = e.target["name"].value;
+      const raza = e.target["raza"].value;
+      if (name === "" || raza === "") {
+        return alert("Faltan datos de la mascota reportada");
+      }
+      const data = {
+        name,
+        raza,
+        pictureURL: imageDataURL.dataURL,
+        lat: state.myData.location.lat,
+        lng: state.myData.location.lng,
+        state: true,
+      };
+      const res = await mainState.doReport(data, token);
+      return (location.pathname = "my-reports");
+    });
+    const cancel = this.shadowRoot.querySelector(".button-cancelar");
+    cancel.addEventListener("click", () => {
+      return (location.pathname = "home");
+    });
+  }
+  getStyles() {
+    return `
                 <style>
                 .container-report{
                   display: flex;
@@ -157,9 +154,8 @@ export function reportPet() {
                 }
                </style>
                 `;
-    }
   }
-  map();
-
-  customElements.define("form-report-pet", ReportPet);
 }
+map();
+
+customElements.define("form-report-pet", ReportPet);
