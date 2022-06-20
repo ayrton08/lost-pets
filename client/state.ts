@@ -67,23 +67,20 @@ const mainState = {
     return data;
   },
 
-  async updateDataUser(data) {
+  async updateDataUser(fullname?, password?) {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     const sendFormUpdate = await fetch(`${API_BASE_URL}/users/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `bearer ${token}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ fullname, password }),
     });
-
     const dataForm = await sendFormUpdate.json();
-    console.log("respuesta del cambio de datos", dataForm);
-
     return dataForm;
   },
+
   async myData() {
     const token = localStorage.getItem("token");
     const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {

@@ -7,8 +7,10 @@ class MyData extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-  render() {
+  async render() {
     const login = localStorage.getItem("token");
+    const state = await mainState.myData();
+
     if (!login) {
       return Router.go("/login");
     }
@@ -19,7 +21,7 @@ class MyData extends HTMLElement {
       <form class="my-data-form">
         <label>
           <h3>Fullname</h3>
-          <input type="text" name="fullname" class="fullname"  />
+          <input type="text" name="fullname" class="fullname" value="${state.fullname}" />
         </label>
   
         <label class="container-password">
@@ -32,38 +34,38 @@ class MyData extends HTMLElement {
         </label>
   
         <button class="save-data">Guardar</button>
+        <div class="result-changes"><div>
         </form>
       </div>
       
       `;
-    (async function () {
-      const state = await mainState.myData();
-      const name = document.querySelector(".fullname");
-      name["value"] = state.fullname;
-      const passwordFirst = document.querySelector(".password-first");
-      const passwordSecond = document.querySelector(".password-second");
 
-      const saveData = document.querySelector(".save-data");
-      saveData.addEventListener("click", (e) => {
-        e.preventDefault();
-        const fullnameEl = document.querySelector(".fullname");
-        const newFullName = fullnameEl["value"];
-        const passwordEl = document.querySelector(".password-first");
-        const newPassword = fullnameEl["value"];
-        const passwordSecond = document.querySelector(".password-second");
+    const passwordFirst = document.querySelector(".password-first");
+    const passwordSecond = document.querySelector(".password-second");
 
-        if (name["value"] != state.fullname) {
-          console.log("el nombre cambio", name["value"]);
+    const saveData = document.querySelector(".my-data-form");
+    console.log("state", state);
+    saveData.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const newFullname = saveData["fullname"].value;
+      const password = saveData["password"].value;
+      const passwordSecond = saveData["password-repeat"].value;
+      const result = document.querySelector(".result-changes");
 
-          const newData = mainState.updateDataUser(newFullName);
-        }
-        if (passwordFirst["value"] === passwordSecond["value"]) {
-          console.log("el password cambio");
+      if (newFullname != state.fullname) {
+        console.log("el nombre cambio", newFullname);
+        await mainState.updateDataUser(newFullname);
+        return (result.textContent = "Cambios guardados ✅");
+      }
+      if (password && password === passwordSecond) {
+        console.log("el password cambio");
 
-          const newData = mainState.updateDataUser(newPassword);
-        }
-      });
-    })();
+        await mainState.updateDataUser(newFullname, password);
+        return (result.textContent = "Cambios guardados ✅");
+      } else {
+        alert("No hay cambios");
+      }
+    });
   }
 }
 customElements.define("my-data-page", MyData);

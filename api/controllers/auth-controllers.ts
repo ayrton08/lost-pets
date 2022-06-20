@@ -17,7 +17,6 @@ export class AuthController {
     try {
       const data = jwt.verify(token, secret);
       req["_user"] = data;
-      console.log("soy la data", data);
       next();
     } catch (error) {
       res.status(401).json(error);
@@ -56,14 +55,17 @@ export class AuthController {
   }
 
   async updatePasswordUser(id, password) {
-    // const passwordHash = this.getSHA256ofString(password);
+    const passwordHash = this.getSHA256ofString(password);
     try {
-      const auth = await Auth.update(password, {
-        where: {
-          id: id,
-        },
-      });
-      return;
+      const auth = await Auth.update(
+        { password: passwordHash },
+        {
+          where: {
+            user_id: id,
+          },
+        }
+      );
+      return auth;
     } catch (error) {
       return new Error("No pudimos actualizar el password");
     }

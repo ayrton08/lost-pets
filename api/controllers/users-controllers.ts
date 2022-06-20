@@ -36,12 +36,15 @@ export class UserController {
 
   async updateNameUser(id, fullname) {
     try {
-      const user = await User.update(fullname, {
-        where: {
-          id: id,
-        },
-      });
-      return;
+      const user = await User.update(
+        { fullname },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      return user;
     } catch (error) {
       return new Error("No pudimos actualizar el nombre");
     }
