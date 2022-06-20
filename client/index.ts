@@ -12,6 +12,5 @@ import "./pages/home";
 import "./pages/welcome";
 import "./components/form.register";
 import "./components/form.login";
-import "./components/card-pet";
 import "./components/form.report-pet";
 import "./router";

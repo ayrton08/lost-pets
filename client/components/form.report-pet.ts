@@ -62,6 +62,7 @@ class ReportPet extends HTMLElement {
     myDropzone.on("addedfile", function (file) {
       // usando este evento pueden acceder al dataURL directamente
       imageDataURL = file;
+      console.log(imageDataURL);
     });
     const state = mainState.getState();
     navigator.geolocation.getCurrentPosition((position) => {
@@ -77,7 +78,7 @@ class ReportPet extends HTMLElement {
       const data = {
         name,
         raza,
-        pictureURL: state.reportUrl || imageDataURL.dataURL,
+        pictureURL: imageDataURL.dataURL || state.reportUrl,
         lat: state.myData.location.lat,
         lng: state.myData.location.lng,
         state: true,

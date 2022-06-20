@@ -125,7 +125,7 @@ const mainState = {
         "Content-Type": "application/json",
         Authorization: `bearer ${UserId}`,
       },
-      body: JSON.stringify(dataForm),
+      body: JSON.stringify({ dataForm }),
     });
     const data = await res.json();
     console.log("soy la respuesta", data);

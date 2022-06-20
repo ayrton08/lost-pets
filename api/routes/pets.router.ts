@@ -61,7 +61,10 @@ router.patch(
   authControllers.authMiddleware,
   async (req, res) => {
     const { id } = req.params;
-    const pet = await Pets.update(req.body, {
+    console.log("body", req.body);
+    const data = await petsController.bodyToUpdate(req.body.dataForm);
+    console.log("data", data);
+    const pet = await Pets.update(data, {
       where: {
         id: id,
       },

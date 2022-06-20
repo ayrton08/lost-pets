@@ -51,6 +51,12 @@ export class PetsController {
     if (body.user_id) {
       rta.User_Id = body.user_id;
     }
+    if (body.raza) {
+      rta.raza = body.raza;
+    }
+    if (body.pictureURL) {
+      rta.pictureURL = body.pictureURL;
+    }
     if (body.lat && body.lng) {
       rta._geoloc = {
         lat: body.lat,
@@ -59,6 +65,32 @@ export class PetsController {
     }
     if (id) {
       rta.objectID = id;
+    }
+    return rta;
+  }
+  async bodyToUpdate(body) {
+    const rta: any = {};
+
+    if (body.name) {
+      rta.name = body.name;
+    }
+    if (body.state) {
+      rta.state = body.state;
+    }
+
+    if (body.raza) {
+      rta.raza = body.raza;
+    }
+    if (body.pictureURL) {
+      const image = await cloudinary.uploader.upload(body.pictureURL, {
+        resource_type: "image",
+        discard_original_filename: true,
+        width: 1000,
+      });
+      rta.pictureURL = image.secure_url;
+    }
+    if (body.lat && body.lng) {
+      (rta.lat = body.lat), (rta.lng = body.lng);
     }
     return rta;
   }

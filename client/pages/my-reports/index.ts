@@ -45,7 +45,7 @@ class MyReports extends HTMLElement {
         const id = Number(`${params["id"]}`);
         state.reportUrl = params["pictureURL"];
         state.reportId = id;
-        const search = await mainState.findById(id);
+        await mainState.findById(id);
         window.scroll({
           top: 100,
           left: 100,
