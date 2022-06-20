@@ -1,5 +1,6 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
+import { Router } from "@vaadin/router";
 const API_BASE_URL = "http://localhost:3000/api/v1";
 
 class MyData extends HTMLElement {
@@ -7,6 +8,10 @@ class MyData extends HTMLElement {
     this.render();
   }
   render() {
+    const login = localStorage.getItem("token");
+    if (!login) {
+      return Router.go("/login");
+    }
     this.innerHTML = `
       <comp-header></comp-header>  
       <div class="content-data">

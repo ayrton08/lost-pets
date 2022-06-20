@@ -1,3 +1,4 @@
+import { Router } from "@vaadin/router";
 class DoReport extends HTMLElement {
   connectedCallback() {
     this.render();
@@ -5,7 +6,7 @@ class DoReport extends HTMLElement {
   render() {
     const login = localStorage.getItem("token");
     if (!login) {
-      return (location.pathname = "login");
+      return Router.go("/login");
     }
     this.innerHTML = `
     <comp-header></comp-header>

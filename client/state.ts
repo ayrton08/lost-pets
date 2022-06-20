@@ -16,6 +16,7 @@ const mainState = {
       },
     },
     reportId: "",
+    reportUrl: "",
   },
   listeners: [],
 
@@ -118,6 +119,21 @@ const mainState = {
     const data = await res.json();
   },
 
+  async updateReport(dataForm: Object, UserId, idPet) {
+    const id = idPet;
+    console.log("id ", id);
+    const res = await fetch(`${API_BASE_URL}/pets/update/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${UserId}`,
+      },
+      body: JSON.stringify(dataForm),
+    });
+    const data = await res.json();
+    console.log("soy la respuesta", data);
+  },
+
   async findMyReports(token: String) {
     const res = await fetch(`${API_BASE_URL}/users/my-pets`, {
       method: "GET",
@@ -147,7 +163,7 @@ const mainState = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(params)
+      body: JSON.stringify(params),
     });
     const data = await res.json();
     return data;

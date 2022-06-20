@@ -1,5 +1,6 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
+import { Router } from "@vaadin/router";
 // const API_BASE_URL = config.apiUrl me tira undefided la variable de ambiente
 const API_BASE_URL = "http://localhost:3000/api/v1";
 class HomePage extends HTMLElement {
@@ -20,7 +21,7 @@ class HomePage extends HTMLElement {
 
     const goToMap = this.querySelector(".see-map");
     goToMap.addEventListener("click", () => {
-      return (location.pathname = "view-report");
+      return Router.go("/view-reports");
     });
 
     const state = mainState.getState();
@@ -50,7 +51,6 @@ class HomePage extends HTMLElement {
       cardDiv.addEventListener("click", async () => {
         const id = Number(`${params["objectID"]}`);
         const search = await mainState.findById(id);
-        console.log("resultado", search);
         window.scroll({
           top: 100,
           left: 100,

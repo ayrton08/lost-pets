@@ -12,12 +12,6 @@ import "./pages/home";
 import "./pages/welcome";
 import "./components/form.register";
 import "./components/form.login";
-import "./components/form.info-pet";
 import "./components/card-pet";
 import "./components/form.report-pet";
 import "./router";
-
-(function () {
-  // const root = document.querySelector(".root");
-  // initRouter(root);
-})();

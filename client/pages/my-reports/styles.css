@@ -10,12 +10,6 @@ body {
   font-size: 40px;
 }
 
-.contenedor-my-reports {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-
-}
 .content-reports {
   display: flex;
   flex-direction: column;
@@ -23,7 +17,11 @@ body {
   text-align: center;
   gap: 20px;
   background-color: #2ecc71;
-  height: 100vh;
 }
-
-
+.name-pet-update {
+  display: block;
+  font-size: 50px;
+  color: darkmagenta;
+  font-weight: bold;
+  background-color: cadetblue;
+}

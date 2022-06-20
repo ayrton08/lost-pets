@@ -38,7 +38,7 @@ export class PetsController {
   }
 
   bodyToIndex(body, id?) {
-    if (!body.lat || !body.lng || !body.name || !body.state) {
+    if (!id) {
       return new Error("Faltan parametros");
     }
     const rta: any = {};
@@ -48,8 +48,8 @@ export class PetsController {
     if (body.state) {
       rta.state = body.state;
     }
-    if (body.UserId) {
-      rta.user_id = body.UserId;
+    if (body.user_id) {
+      rta.User_Id = body.user_id;
     }
     if (body.lat && body.lng) {
       rta._geoloc = {

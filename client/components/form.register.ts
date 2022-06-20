@@ -1,4 +1,5 @@
 import { mainState } from "../state";
+import { Router } from "@vaadin/router";
 class FormRegister extends HTMLElement {
   constructor() {
     super();
@@ -97,7 +98,7 @@ class FormRegister extends HTMLElement {
           emailExist.textContent =
             "Registro exitoso! Te enviaremos a loguearte ✅";
           emailExist["style"].color = "#009933";
-          return (location.pathname = "login");
+          return Router.go("/login");
         } else {
           emailExist["style"].fontSize = "20px";
           emailExist.textContent = "El email ingresado ya existe";

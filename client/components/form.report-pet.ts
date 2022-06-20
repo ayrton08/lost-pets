@@ -1,6 +1,7 @@
 import { mainState } from "../state";
 import Dropzone from "dropzone";
 import { map } from "./mapa";
+import { Router } from "@vaadin/router";
 
 class ReportPet extends HTMLElement {
   constructor() {
@@ -73,23 +74,38 @@ class ReportPet extends HTMLElement {
       e.preventDefault();
       const name = e.target["name"].value;
       const raza = e.target["raza"].value;
-      if (name === "" || raza === "") {
-        return alert("Faltan datos de la mascota reportada");
-      }
       const data = {
         name,
         raza,
-        pictureURL: imageDataURL.dataURL,
+        pictureURL: state.reportUrl || imageDataURL.dataURL,
         lat: state.myData.location.lat,
         lng: state.myData.location.lng,
         state: true,
       };
-      const res = await mainState.doReport(data, token);
-      return (location.pathname = "my-reports");
+
+      if (location.pathname === "/do-report") {
+        if (name === "" || raza === "") {
+          return alert("Faltan datos de la mascota reportada");
+        }
+        await mainState.doReport(data, token);
+        return Router.go("/my-reports");
+      }
+      if (location.pathname === "/my-reports") {
+        const idPet = state.reportId;
+
+        console.log("idPet", idPet);
+        await mainState.updateReport(data, token, idPet);
+        div.innerHTML = `
+          <div class="report-send">¡Reporte enviado con exito! ✅</div>
+          `;
+        location.reload();
+
+        return Router.go("/my-reports");
+      }
     });
     const cancel = this.shadowRoot.querySelector(".button-cancelar");
     cancel.addEventListener("click", () => {
-      return (location.pathname = "home");
+      return Router.go("/home");
     });
   }
   getStyles() {
@@ -103,7 +119,6 @@ class ReportPet extends HTMLElement {
                   background-color: #CFD8DC;
                   align-items: center;
                   justify-content: center;
-                  margin:40px 40px 0 40px;
   
                 }
 

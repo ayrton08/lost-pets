@@ -1,3 +1,4 @@
+import { Router } from "@vaadin/router";
 class WelcomePage extends HTMLElement {
   constructor() {
     super();
@@ -7,7 +8,6 @@ class WelcomePage extends HTMLElement {
   }
 
   render() {
-    
     this.innerHTML = `
       <comp-header></comp-header>
       <div class="content">
@@ -19,7 +19,7 @@ class WelcomePage extends HTMLElement {
       `;
     const locationEl = this.querySelector(".location");
     locationEl.addEventListener("click", () => {
-      location.pathname = "home";
+      return Router.go("/home");
     });
     const login = localStorage.getItem("token");
     if (!login) {
@@ -30,10 +30,10 @@ class WelcomePage extends HTMLElement {
       const loginButton = divButton.querySelector(".button-login");
       const registerButton = divButton.querySelector(".button-register");
       loginButton.addEventListener("click", () => {
-        location.pathname = "login";
+        return Router.go("/login");
       });
       registerButton.addEventListener("click", () => {
-        location.pathname = "register";
+        return Router.go("/register");
       });
     }
   }

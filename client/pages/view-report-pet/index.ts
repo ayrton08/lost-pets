@@ -10,7 +10,7 @@ class ReportMapPage extends HTMLElement {
   }
   render() {
     this.innerHTML = `
-    <comp-header></comp-header>
+      <comp-header></comp-header>
     `;
 
     const mapa = document.querySelector(".search-form");

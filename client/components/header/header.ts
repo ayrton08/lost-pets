@@ -90,7 +90,10 @@ class Header extends HTMLElement {
       // if (stateLocal.fullname) {
       //   nameUser.textContent = `${stateLocal.fullname}`;
       // }
-
+      const goToHome = this.shadowRoot.querySelector(".logo");
+      goToHome.addEventListener("click", () => {
+        Router.go("/home");
+      });
       const closeSession = this.shadowRoot.querySelector(".close-session");
       closeSession.addEventListener("click", () => {
         mainState.logOut();

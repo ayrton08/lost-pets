@@ -56,17 +56,21 @@ router.post(
   }
 );
 
-router.patch("/update/:id", async (req, res) => {
-  const { id } = req.params;
-  const pet = await Pets.update(req.body, {
-    where: {
-      id: id,
-    },
-  });
-  const indexItem = petsController.bodyToIndex(req.body, id);
-  const algoliaRes = await index.partialUpdateObject(indexItem);
-  return res.json(pet);
-});
+router.patch(
+  "/update/:id",
+  authControllers.authMiddleware,
+  async (req, res) => {
+    const { id } = req.params;
+    const pet = await Pets.update(req.body, {
+      where: {
+        id: id,
+      },
+    });
+    const indexItem = petsController.bodyToIndex(req.body, id);
+    const algoliaRes = await index.partialUpdateObject(indexItem);
+    return res.json(pet);
+  }
+);
 
 router.get("/by-id/:id", async (req, res) => {
   const { id } = req.params;
