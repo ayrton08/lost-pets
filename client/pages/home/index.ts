@@ -31,21 +31,30 @@ class HomePage extends HTMLElement {
       mainState.setState(state);
 
       getDataPets().then(async (data) => {
-        // console.log(data);
-        for (const c of data) {
-          addPetCard(c);
-        }
+        data.map((item) => {
+          if (item.state) {
+            return addPetCard(item);
+          }
+        });
       });
     });
 
     function addPetCard(params = {}) {
+      console.log(params);
       const cardDiv = document.createElement("div");
       cardDiv.className = "pets-card";
       cardDiv.innerHTML = `
         
-                <img class="logo-section-two" style="width: 100%;" src='${params["pictureURL"]}' />
-                <span class="title-name">Nombre: ${params["name"]} <span class="title"></span></span>
-                <a id='${params["objectID"]}'>Reportar</a>
+                <img class="logo-section-two" style="width: 100%;" src='${
+                  params["pictureURL"]
+                }' />
+                <span class="title-name">Nombre:  <span class="title">${
+                  params["name"]
+                }</span></span>
+                <span class="title-name">Raza:  <span class="title">${
+                  params["raza"] || ""
+                }</span></span>
+                <a id='${params["objectID"]}' class="editar">Reportar</a>
        `;
 
       cardDiv.addEventListener("click", async () => {

@@ -118,7 +118,6 @@ const mainState = {
 
   async updateReport(dataForm: Object, UserId, idPet) {
     const id = idPet;
-    console.log("id ", id);
     const res = await fetch(`${API_BASE_URL}/pets/update/${id}`, {
       method: "PATCH",
       headers: {
@@ -128,7 +127,6 @@ const mainState = {
       body: JSON.stringify({ dataForm }),
     });
     const data = await res.json();
-    console.log("soy la respuesta", data);
   },
 
   async findMyReports(token: String) {

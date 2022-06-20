@@ -40,11 +40,7 @@ class MyData extends HTMLElement {
       
       `;
 
-    const passwordFirst = document.querySelector(".password-first");
-    const passwordSecond = document.querySelector(".password-second");
-
     const saveData = document.querySelector(".my-data-form");
-    console.log("state", state);
     saveData.addEventListener("submit", async (e) => {
       e.preventDefault();
       const newFullname = saveData["fullname"].value;
@@ -53,13 +49,10 @@ class MyData extends HTMLElement {
       const result = document.querySelector(".result-changes");
 
       if (newFullname != state.fullname) {
-        console.log("el nombre cambio", newFullname);
         await mainState.updateDataUser(newFullname);
         return (result.textContent = "Cambios guardados ✅");
       }
       if (password && password === passwordSecond) {
-        console.log("el password cambio");
-
         await mainState.updateDataUser(newFullname, password);
         return (result.textContent = "Cambios guardados ✅");
       } else {

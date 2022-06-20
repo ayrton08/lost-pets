@@ -39,10 +39,11 @@ router.post(
       const newPet = await petsController.reportLostPet(newPetData);
 
       const id = newPet["id"];
-      const { name, state, lat, lng } = req.body;
+      const { name, raza, state, lat, lng } = req.body;
       const algolia = await petsController.updateReportAlgolia(
         id,
         name,
+        raza,
         state,
         lat,
         lng,
@@ -61,15 +62,14 @@ router.patch(
   authControllers.authMiddleware,
   async (req, res) => {
     const { id } = req.params;
-    console.log("body", req.body);
     const data = await petsController.bodyToUpdate(req.body.dataForm);
-    console.log("data", data);
     const pet = await Pets.update(data, {
       where: {
         id: id,
       },
     });
-    const indexItem = petsController.bodyToIndex(req.body, id);
+    const indexItem = petsController.bodyToIndex(req.body.dataForm, id);
+    console.log("index", indexItem);
     const algoliaRes = await index.partialUpdateObject(indexItem);
     return res.json(pet);
   }

@@ -76,8 +76,6 @@ class ReportMapPage extends HTMLElement {
         )
           .then((res) => res.json())
           .then((results) => {
-            console.log(results);
-
             const geojson = {
               type: "FeatureCollection",
               features: [],

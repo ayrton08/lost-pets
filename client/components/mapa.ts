@@ -48,13 +48,11 @@ export function map() {
   const map = initMap();
   initSearchForm(function (results) {
     const resultsSearch = results[1];
-    console.log(resultsSearch);
     if (!resultsSearch) {
       const firstResult = [
         state.myData.location.lng,
         state.myData.location.lat,
       ];
-      console.log("results map", firstResult);
       const marker = new mapboxgl.Marker().setLngLat(firstResult).addTo(map);
       map.setCenter(firstResult);
       map.setZoom(16);

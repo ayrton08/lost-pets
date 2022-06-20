@@ -24,21 +24,26 @@ class MyReports extends HTMLElement {
 
     getDataPets().then((data) => {
       for (const c of data) {
-        console.log(c);
         addPetCard(c);
       }
     });
 
     function addPetCard(params = {}) {
       const state = mainState.getState();
-
+      let status = "Encontrado";
+      if (params["state"] === "true") {
+        console.log("entre al if");
+        status = "Perdido";
+      }
       const cardDiv = document.createElement("div");
       cardDiv.className = "pets-card";
       cardDiv.innerHTML = `
     
             <img class="logo-section-two" style="width: 100%;" src='${params["pictureURL"]}' />
-            <span class="title-name">Nombre: ${params["name"]} <span class="title"></span></span>
-            <a id='${params["id"]}'>Editar</a>
+            <span class="title-name">Nombre: <span class="title-reports">${params["name"]}</span></span>
+            <span class="title-name">Raza: <span class="title-reports">${params["raza"]} </span></span>
+            <span class="title-name">Estado: <span class="status">${status} 🐶 </span></span>
+            <a id='${params["id"]}' class="editar">Editar</a>
    `;
 
       cardDiv.addEventListener("click", async () => {
@@ -73,7 +78,6 @@ class MyReports extends HTMLElement {
     async function getDataPets() {
       const token = localStorage.getItem("token");
       const response = await mainState.findMyReports(token);
-      console.log("esta es la repuesta de las pets que son mias", response);
       return response;
     }
   }

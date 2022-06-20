@@ -33,8 +33,8 @@ class ReportPet extends HTMLElement {
                 Por defecto se reportara la ubicación en la que se encuentra, si desea indicar otra ubicacion en el reporte puede hacerlo en el mapa abajo.
               </span>
               <button class="send-form">Reportar como Perdido</button>
-              </form>
-              <button class="button-cancelar">Cancelar</button>
+        </form>
+        <button class="button-cancelar">Cancelar</button>
           ${this.getStyles()}`;
     this.shadowRoot.appendChild(div);
 
@@ -47,8 +47,10 @@ class ReportPet extends HTMLElement {
       searchMap["style"].display = "inherit";
       mapa["style"].overflow = "inherit";
     }
+    const state = mainState.getState();
 
     const token = localStorage.getItem("token");
+    const idPet = state.reportId;
 
     const form = this.shadowRoot.querySelector(".form-report");
     const profile = this.shadowRoot.querySelector(".profile-picture-container");
@@ -62,13 +64,24 @@ class ReportPet extends HTMLElement {
     myDropzone.on("addedfile", function (file) {
       // usando este evento pueden acceder al dataURL directamente
       imageDataURL = file;
-      console.log(imageDataURL);
     });
-    const state = mainState.getState();
     navigator.geolocation.getCurrentPosition((position) => {
       state.myData.location.lat = position.coords.latitude;
       state.myData.location.lng = position.coords.longitude;
       mainState.setState(state);
+    });
+    const buttonFind = this.shadowRoot.querySelector(".button-cancelar");
+    if (location.pathname === "/my-reports") {
+      const buttonSave = this.shadowRoot.querySelector(".send-form");
+      buttonSave.textContent = "Guardar 💾";
+      buttonFind.textContent = "Reportar como encontrado";
+      buttonFind["style"].backgroundColor = "#5DADE2";
+    }
+    buttonFind.addEventListener("click", async (e) => {
+      e.preventDefault();
+      console.log("entre en el find");
+      await mainState.updateReport({ state: false }, token, idPet);
+      return;
     });
 
     form.addEventListener("submit", async (e) => {
@@ -85,6 +98,10 @@ class ReportPet extends HTMLElement {
       };
 
       if (location.pathname === "/do-report") {
+        const cancel = this.shadowRoot.querySelector(".button-cancelar");
+        cancel.addEventListener("click", () => {
+          return Router.go("/home");
+        });
         if (name === "" || raza === "") {
           return alert("Faltan datos de la mascota reportada");
         }
@@ -92,21 +109,13 @@ class ReportPet extends HTMLElement {
         return Router.go("/my-reports");
       }
       if (location.pathname === "/my-reports") {
-        const idPet = state.reportId;
-
-        console.log("idPet", idPet);
         await mainState.updateReport(data, token, idPet);
         div.innerHTML = `
           <div class="report-send">¡Reporte enviado con exito! ✅</div>
           `;
         location.reload();
-
         return Router.go("/my-reports");
       }
-    });
-    const cancel = this.shadowRoot.querySelector(".button-cancelar");
-    cancel.addEventListener("click", () => {
-      return Router.go("/home");
     });
   }
   getStyles() {

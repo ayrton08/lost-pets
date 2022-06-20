@@ -22,9 +22,3 @@ app.get("/test", async (req, res) => {
 });
 
 routerApi(app);
-
-// app.use(express.static(staticDir));
-
-// app.get("*", (req, res) => {
-//   res.sendFile(staticDir + "/index.html");
-// });

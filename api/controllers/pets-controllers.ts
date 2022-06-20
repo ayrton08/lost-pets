@@ -22,10 +22,20 @@ export class PetsController {
     return hits;
   }
 
-  async updateReportAlgolia(id, name, state, lat, lng, user_id, pictureURL) {
+  async updateReportAlgolia(
+    id,
+    name,
+    raza,
+    state,
+    lat,
+    lng,
+    user_id,
+    pictureURL
+  ) {
     const algoliaRes = await index.saveObject({
       objectID: id,
       name: name,
+      raza: raza,
       state: state,
       _geoloc: {
         lat: lat,
@@ -45,7 +55,7 @@ export class PetsController {
     if (body.name) {
       rta.name = body.name;
     }
-    if (body.state) {
+    if (!body.state) {
       rta.state = body.state;
     }
     if (body.user_id) {
@@ -70,11 +80,10 @@ export class PetsController {
   }
   async bodyToUpdate(body) {
     const rta: any = {};
-
     if (body.name) {
       rta.name = body.name;
     }
-    if (body.state) {
+    if (!body.state) {
       rta.state = body.state;
     }
 

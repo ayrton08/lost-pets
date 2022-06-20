@@ -24,8 +24,6 @@ router.post("/", async (req, res, next) => {
 
 router.patch("/update", authController.authMiddleware, async (req, res) => {
   const { id } = req["_user"];
-  console.log("body", req.body);
-  console.log("id", id);
   if (!id) {
     return res.json({ error: "Falta el userId" });
   }
@@ -33,12 +31,10 @@ router.patch("/update", authController.authMiddleware, async (req, res) => {
     const newName = await userController.updateNameUser(id, req.body.fullname);
   }
   if (req.body.password) {
-    console.log("entre en el if");
     const newPassword = await authController.updatePasswordUser(
       id,
       req.body.password
     );
-    console.log(newPassword);
   }
   return res.json("status: ok");
 });
@@ -53,7 +49,6 @@ router.get("/my-pets", authController.authMiddleware, async (req, res) => {
 });
 
 router.post("/info-pet", async (req, res) => {
-  console.log(req.body);
   if (!req.body) {
     return res.status(401).json("Faltan datos en el reporte");
   }
