@@ -8,6 +8,7 @@ class RegisterPage extends HTMLElement {
       <div class="content">
       <form-register></form-register>
     `;
+    
   }
 }
 customElements.define("register-page", RegisterPage);

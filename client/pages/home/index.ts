@@ -40,7 +40,6 @@ class HomePage extends HTMLElement {
     });
 
     function addPetCard(params = {}) {
-      console.log(params);
       const cardDiv = document.createElement("div");
       cardDiv.className = "pets-card";
       cardDiv.innerHTML = `

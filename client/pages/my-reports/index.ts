@@ -32,7 +32,6 @@ class MyReports extends HTMLElement {
       const state = mainState.getState();
       let status = "Encontrado";
       if (params["state"] === "true") {
-        console.log("entre al if");
         status = "Perdido";
       }
       const cardDiv = document.createElement("div");

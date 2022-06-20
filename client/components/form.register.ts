@@ -124,7 +124,16 @@ class FormRegister extends HTMLElement {
               gap: 10px;
               padding: 20px;
               width: 100%;
-            },
+            }
+
+            .send-form{
+              cursor: pointer;
+            }
+            
+            .show-password{
+              cursor: pointer;
+              
+            }
             
            </style>
             `;

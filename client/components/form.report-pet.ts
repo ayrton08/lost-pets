@@ -71,6 +71,10 @@ class ReportPet extends HTMLElement {
       mainState.setState(state);
     });
     const buttonFind = this.shadowRoot.querySelector(".button-cancelar");
+    buttonFind.addEventListener("click",(e)=>{
+      e.preventDefault()
+      return Router.go("/home")
+    })
     if (location.pathname === "/my-reports") {
       const buttonSave = this.shadowRoot.querySelector(".send-form");
       buttonSave.textContent = "Guardar 💾";
@@ -79,7 +83,6 @@ class ReportPet extends HTMLElement {
     }
     buttonFind.addEventListener("click", async (e) => {
       e.preventDefault();
-      console.log("entre en el find");
       await mainState.updateReport({ state: false }, token, idPet);
       return;
     });
@@ -138,6 +141,7 @@ class ReportPet extends HTMLElement {
                   gap:30px;
                   padding:30px 30px 0 30px;
                   align-items: center;
+                  max-width: 600px;
                 }
 
                 button {
@@ -148,16 +152,13 @@ class ReportPet extends HTMLElement {
                   min-width:200px;
                   min-height: 150px;
                   background-color: #E5E8E8;
-                  
-
                 }
-
-                
                 
                 .subtitle{
                   margin: 0px;
                   font-size: 20px;
                 }
+
                 .instructions-search {
                   font-size: 20px;
                 }
@@ -168,6 +169,7 @@ class ReportPet extends HTMLElement {
                   min-width:100px;
                   min-height: 40px;
                   border-radius: 5px;
+                  cursor: pointer;
                 }
 
                 .send-form{
@@ -175,7 +177,7 @@ class ReportPet extends HTMLElement {
                   min-width:100px;
                   min-height: 40px;
                   border-radius: 5px;
-
+                  cursor: pointer;
                 }
                </style>
                 `;

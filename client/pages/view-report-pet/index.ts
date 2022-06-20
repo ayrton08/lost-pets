@@ -61,14 +61,14 @@ class ReportMapPage extends HTMLElement {
 
     (function () {
       const map = initMap();
-      initSearchForm(function (results) {
+      initSearchForm(async function (results) {
         const firstResult = results[0];
         const marker = new mapboxgl.Marker()
           .setLngLat(firstResult.geometry.coordinates)
           .addTo(map);
 
         const [lng, lat] = firstResult.geometry.coordinates;
-        fetch(
+        await fetch(
           `http://localhost:3000/api/v1/pets/find-by-location?lat=${lat}&lng=${lng}`,
           {
             method: "get",

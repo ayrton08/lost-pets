@@ -2,9 +2,6 @@ import { mainState } from "../../state";
 import { Router } from "@vaadin/router";
 
 class Header extends HTMLElement {
-  constructor() {
-    super();
-  }
   connectedCallback() {
     this.render();
   }
@@ -75,7 +72,9 @@ class Header extends HTMLElement {
         <button class="modal-close">❌</button>
           
           <span class="my-data">Mis Datos</span>
+          <hr>
           <span class="my-reports">Mis Mascotas Reportadas</span>
+          <hr>
           <span class="do-report">Reportar Mascota</span>
           
           <div class="menu-footer">
@@ -154,9 +153,10 @@ class Header extends HTMLElement {
                   background-color: #FFE082;
                   font-size: 40px;
                   font-weight: bold;
-                  padding: 80px;
+                  padding: 180px 80px 80px 80px;
                   opacity: 0.9;
                   display: none;
+                  cursor: pointer;
                   
                 }
 
@@ -165,6 +165,7 @@ class Header extends HTMLElement {
                   flex-direction: column;
                   gap: 60px;
                   padding-top:60px;
+                  cursor: pointer;
                 }
 
                 .menu-footer {
@@ -178,6 +179,50 @@ class Header extends HTMLElement {
                   left: 350px;
                   right: 30px;
                   bottom: 690px;
+                }
+
+                @media (min-width: 800px) {
+                  .modal-close {
+                    position: absolute;
+                    top: 50px;
+                    left: 1000px;
+                    right: 30px;
+                    bottom: 800px;
+                      
+                  }
+              }
+
+                .abre-ventana {
+                  font-size: 50px;
+                  cursor: pointer;
+                  background-color: transparent;
+                  border: none;
+                }
+
+                .modal-close {
+                  position: absolute;
+                  top: 20px;
+                  right: 20px;
+                  font-size: 50px;
+                  cursor: pointer;
+                  background-color: transparent;
+                  border: none;
+                }  
+                
+                .close-session{
+                  width: 160px;
+                  height: 40px;
+                  background-color: red;
+                  color: aliceblue;
+                  font-weight: bold;
+                  font-size: 20px;
+                  border-radius: 3px;
+                  cursor: pointer;
+                }
+
+                .logo{
+                  cursor: pointer;
+
                 }
                </style>
                 `;

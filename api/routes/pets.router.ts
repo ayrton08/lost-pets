@@ -69,7 +69,6 @@ router.patch(
       },
     });
     const indexItem = petsController.bodyToIndex(req.body.dataForm, id);
-    console.log("index", indexItem);
     const algoliaRes = await index.partialUpdateObject(indexItem);
     return res.json(pet);
   }

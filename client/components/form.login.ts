@@ -82,8 +82,10 @@ class FormLogin extends HTMLElement {
                 align-items: center;
                 border-radius: 5px;
                 gap: 30px;
-                padding: 20px;
-                margin: 60px;
+                padding: 50px;
+                margin: 40px;
+                max-width: 600px
+                min-width: 300px
                 
               }
               
@@ -93,6 +95,7 @@ class FormLogin extends HTMLElement {
                 font-size: 20px;
                 border-radius: 5px;
                 background-color: chartreuse;
+                cursor: pointer;
               }
 
               .password-validator{

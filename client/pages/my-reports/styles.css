@@ -13,8 +13,8 @@ body {
 .content-reports {
   display: flex;
   flex-direction: column;
-  padding: 50px 50px 0px 50px;
   text-align: center;
+  align-items: center;
   gap: 20px;
   background-color: #2ecc71;
 }
@@ -38,4 +38,7 @@ body {
 .status{
   color: green;
   font-size: 20px;
+}
+.search-form{
+  align-content: center;
 }
