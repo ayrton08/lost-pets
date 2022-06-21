@@ -4,11 +4,11 @@
   "license": "MIT",
   "scripts": {
     "dev:front": "parcel serve ./client/index.html",
+    "dev:back": "nodemon --watch ./server/index.ts --exec ts-node ./server/dev.ts",
     "build:front": "parcel build ./client/index.html",
-    "dev:back": "nodemon --watch ./api/index.ts --exec ts-node ./api/index.ts",
-    "build:api": "tsc",
+    "build:api": "tsc ./api/index.ts",
     "build": "yarn build:front && yarn build:api",
-    "start": "node ./be-dist/api/index.js"
+    "start": "node ./server/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
