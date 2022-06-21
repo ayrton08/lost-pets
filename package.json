@@ -4,14 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:back": "nodemon --watch './be-src/index.ts' --exec ts-node ./be-src/index.ts",
-    "dev": "nodemon ./api/index.ts",
-    "sync:back": "ts-node ./api/models/sync.ts",
-    "build:back": "tsc",
-    "start": "node ./client/dist/index.js",
+    "dev:front": "parcel serve ./client/index.html",
     "build:front": "parcel build ./client/index.html",
-    "build": "npm run build:back && npm run build:front",
-    "dev:front": "parcel serve ./index.html"
+    "dev:back": "nodemon --watch ./api/index.ts --exec ts-node ./api/index.ts",
+    "build:api": "tsc ./api/index.ts",
+    "build": "yarn run build:front && yarn run build:api",
+    "start": "node ./api/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
