@@ -8,7 +8,7 @@
     "build:front": "parcel build ./client/index.html",
     "dev:back": "nodemon --watch ./api/index.ts --exec ts-node ./api/index.ts",
     "build:api": "tsc ./api/index.ts",
-    "build": "yarn run build:front && yarn run build:api",
+    "build": "yarn build:front && yarn build:api",
     "start": "node ./api/index.js"
   },
   "dependencies": {
