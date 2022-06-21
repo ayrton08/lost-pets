@@ -8,7 +8,7 @@
     "dev:back": "nodemon --watch ./api/index.ts --exec ts-node ./api/index.ts",
     "build:api": "tsc",
     "build": "yarn build:front && yarn build:api",
-    "start": "node ./api/index.js"
+    "start": "node ./be-dist/api/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
