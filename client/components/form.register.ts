@@ -120,7 +120,7 @@ class FormRegister extends HTMLElement {
               background-color: #A2D9CE;
               justify-content: center;
               align-items: center;
-              border: solid 2px;
+              border-radius: 5px;
               gap: 10px;
               padding: 20px;
               width: 100%;

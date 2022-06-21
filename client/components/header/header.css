@@ -47,7 +47,7 @@ body {
   width: 100px;
   height: 100px;
   cursor: pointer;
-  background-color: black !important;
+  background-color: transparent;
 }
 
 @media (min-width: 750px) {
@@ -114,8 +114,8 @@ body {
 button {
   color: #f2f3f4;
   background-color: black;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
