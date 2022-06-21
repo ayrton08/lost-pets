@@ -8,8 +8,8 @@
     "dev": "nodemon ./api/index.ts",
     "sync:back": "ts-node ./api/models/sync.ts",
     "build:back": "tsc",
-    "start": "node ./be-dist/index.js",
-    "build:front": "",
+    "start": "node ./client/dist/index.js",
+    "build:front": "parcel build ./client/index.html",
     "build": "npm run build:back && npm run build:front",
     "dev:front": "parcel serve ./index.html"
   },
