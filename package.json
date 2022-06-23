@@ -9,14 +9,8 @@
     "sync:back": "ts-node ./api/models/sync.ts",
     "build:back": "tsc",
     "build:front": "parcel build ./client/index.html",
-<<<<<<< HEAD
     "build": "npm run build:back && npm run build:front",
     "start": "node ./dist/index.js"
-=======
-    "build:api": "tsc",
-    "build": "yarn build:front && yarn build:api",
-    "start": "node ./api/index.js"
->>>>>>> 374baf9fa4c65937d0ead1abbd5c2d7ae5eb6b20
   },
   "dependencies": {
     "@types/node": "^17.0.41",
