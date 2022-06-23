@@ -8,10 +8,8 @@ class MyData extends HTMLElement {
     this.render();
   }
   async render() {
-    const login = localStorage.getItem("token");
-    const state = await mainState.myData();
-
-    if (!login) {
+    const stateLogin = await mainState.myData();
+    if (!stateLogin.id) {
       return Router.go("/login");
     }
     this.innerHTML = `
@@ -21,7 +19,7 @@ class MyData extends HTMLElement {
       <form class="my-data-form">
         <label>
           <h3>Fullname</h3>
-          <input type="text" name="fullname" class="fullname" value="${state.fullname}" />
+          <input type="text" name="fullname" class="fullname" value="${stateLogin.fullname}" />
         </label>
   
         <label class="container-password">
@@ -48,7 +46,7 @@ class MyData extends HTMLElement {
       const passwordSecond = saveData["password-repeat"].value;
       const result = document.querySelector(".result-changes");
 
-      if (newFullname != state.fullname) {
+      if (newFullname != stateLogin.fullname) {
         await mainState.updateDataUser(newFullname);
         return (result.textContent = "Cambios guardados ✅");
       }

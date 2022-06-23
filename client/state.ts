@@ -20,8 +20,6 @@ const mainState = {
   },
   listeners: [],
 
-  init() {},
-
   getState() {
     return this.data;
   },

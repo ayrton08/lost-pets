@@ -1,11 +1,12 @@
 import { Router } from "@vaadin/router";
+import { mainState } from "../../state";
 class DoReport extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-  render() {
-    const login = localStorage.getItem("token");
-    if (!login) {
+  async render() {
+    const stateLogin = await mainState.myData();
+    if (!stateLogin.id) {
       return Router.go("/login");
     }
     this.innerHTML = `

@@ -7,9 +7,9 @@ class MyReports extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-  render() {
-    const login = localStorage.getItem("token");
-    if (!login) {
+  async render() {
+    const stateLogin = await mainState.myData();
+    if (!stateLogin.id) {
       return Router.go("/login");
     }
     this.innerHTML = `

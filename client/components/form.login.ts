@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import { Router } from "@vaadin/router";
-
 import { mainState } from "../state";
+
 class FormLogin extends HTMLElement {
   constructor() {
     super();
@@ -16,16 +16,7 @@ class FormLogin extends HTMLElement {
     const div = document.createElement("div");
     div.className = "root";
 
-    const stateLogin = localStorage.getItem("token");
-    if (stateLogin) {
-      setTimeout(() => {
-        div.innerHTML = `Regirigiendo... 🕒`;
-      }, 5000);
-      return Router.go("/home");
-    }
-
     div.innerHTML = `
-       
         <div>
               <form class="form-login">
                   <label>
@@ -55,19 +46,17 @@ class FormLogin extends HTMLElement {
       const email = e.target["email"].value;
       const password = e.target["password"].value;
       const login = await mainState.login(email, password);
+      console.log(login);
 
       if (state.myData.login) {
-        try {
-          valid["style"].color = "green";
-          valid.textContent = "Login exitoso ✅";
-          mainState.setToken(login);
-          return Router.go("/home");
-        } catch (error) {
-          valid["style"].color = "red";
-          valid["style"].fontSize = "20px";
-          valid.textContent = "Email o contraseña incorrecta ❌";
-          console.error(error);
-        }
+        valid["style"].color = "green";
+        valid.textContent = "Login exitoso ✅";
+        mainState.setToken(login);
+        return Router.go("/home");
+      } else {
+        valid["style"].color = "red";
+        valid["style"].fontSize = "15px";
+        valid.textContent = "Email o contraseña incorrecta ❌";
       }
     });
   }
@@ -79,7 +68,7 @@ class FormLogin extends HTMLElement {
                 flex-direction: column;
                 background-color: #F9E79F;
                 justify-content: center;
-                align-items: center;
+                align-content: center;
                 border-radius: 5px;
                 gap: 30px;
                 padding: 50px;

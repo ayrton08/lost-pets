@@ -36,7 +36,7 @@ export class AuthController {
     }
     const id = Number(auth.get("user_id"));
     const user = await User.findByPk(id);
-    const token = jwt.sign(user["dataValues"], "estoesunsecreto");
+    const token = jwt.sign(user["dataValues"], secret);
     return token;
   }
 
