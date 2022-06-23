@@ -1,17 +1,14 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev:back": "nodemon --watch './be-src/index.ts' --exec ts-node ./be-src/index.ts",
-    "dev": "nodemon ./api/index.ts",
-    "sync:back": "ts-node ./api/models/sync.ts",
-    "build:back": "tsc",
-    "start": "node ./client/dist/index.js",
+    "dev:front": "parcel serve ./client/index.html",
+    "dev:back": "nodemon --watch ./server/index.ts --exec ts-node ./server/dev.ts",
     "build:front": "parcel build ./client/index.html",
-    "build": "npm run build:back && npm run build:front",
-    "dev:front": "parcel serve ./index.html"
+    "build:api": "tsc ./api/index.ts",
+    "build": "yarn build:front && yarn build:api",
+    "start": "node ./server/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
