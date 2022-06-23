@@ -11,8 +11,9 @@ class FormLogin extends HTMLElement {
     this.render();
   }
 
-  render() {
+  async render() {
     this.attachShadow({ mode: "open" });
+
     const div = document.createElement("div");
     div.className = "root";
 
@@ -34,7 +35,14 @@ class FormLogin extends HTMLElement {
                   ${this.getStyles()}    
               `;
     this.shadowRoot.appendChild(div);
+
     const state = mainState.getState();
+    const stateLogin = await mainState.myData();
+    if (stateLogin.id) {
+      state.myData.fullname = stateLogin.fullname;
+      return Router.go("/home");
+    }
+
     const formLogin = this.shadowRoot.querySelector(".form-login");
     const valid = this.shadowRoot.querySelector(".password-validator");
 
@@ -69,6 +77,8 @@ class FormLogin extends HTMLElement {
                 background-color: #F9E79F;
                 justify-content: center;
                 align-content: center;
+                align-items: center;
+                text-align: center;
                 border-radius: 5px;
                 gap: 30px;
                 padding: 50px;

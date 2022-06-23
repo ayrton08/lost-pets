@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "outDir": "be-dist"
-  },
-  "includes": ["./be-src/**/*.ts"]
-}

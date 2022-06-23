@@ -1,6 +1,6 @@
 import { config } from "./config";
 // const API_BASE_URL = config.apiUrl; me da undefined cuando lo traigo como variable de ambiente
-const API_BASE_URL = "http://localhost:3000/api/v1";
+const API_BASE_URL = "http://localhost:4000/api/v1";
 
 const mainState = {
   data: {

@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "outDir": "be-dist"
+    "outDir": "api"
   },
-  "includes": ["./be-src/**/*.ts"]
+  "includes": ["./api/**/*.ts"]
 }

@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "dev:back": "nodemon --watch './api/index.ts' --exec ts-node ./api/index.ts",
     "dev:front": "parcel serve ./client/index.html",
-    "dev:back": "nodemon --watch ./server/index.ts --exec ts-node ./server/dev.ts",
+    "dev": "nodemon ./api/index.ts",
+    "sync:back": "ts-node ./api/models/sync.ts",
+    "build:back": "tsc",
     "build:front": "parcel build ./client/index.html",
-    "build:api": "tsc ./api/index.ts",
-    "build": "yarn build:front && yarn build:api",
-    "start": "node ./server/index.js"
+    "build": "npm run build:back && npm run build:front",
+    "start": "node ./dist/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
@@ -33,15 +35,17 @@
     "typescript": "^4.7.3"
   },
   "devDependencies": {
-    "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
     "events": "^3.3.0",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.4",
+    "@types/cors": "^2.8.12",
+    "@types/mapbox-gl": "^2.7.2",
+    "buffer": "^6.0.3",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
-    "stream-browserify": "^3.0.0",
-    "url": "^0.11.0",
-    "util": "^0.12.4"
+    "url": "^0.11.0"
   }
 }
