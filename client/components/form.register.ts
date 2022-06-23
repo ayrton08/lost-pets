@@ -1,10 +1,6 @@
 import { mainState } from "../state";
 import { Router } from "@vaadin/router";
 class FormRegister extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     this.render();
   }

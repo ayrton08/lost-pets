@@ -5,11 +5,8 @@ class LoginPage extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-  async render() {
-    const stateLogin = await mainState.myData();
-    if (!stateLogin.id) {
-      return Router.go("/login");
-    }
+  render() {
+    
     this.innerHTML = `
     <comp-header></comp-header>
     <div class="content-login">

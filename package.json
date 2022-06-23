@@ -6,9 +6,9 @@
     "dev:front": "parcel serve ./client/index.html",
     "dev:back": "nodemon --watch ./server/index.ts --exec ts-node ./server/dev.ts",
     "build:front": "parcel build ./client/index.html",
-    "build:api": "tsc ./api/index.ts",
+    "build:api": "tsc",
     "build": "yarn build:front && yarn build:api",
-    "start": "node ./server/index.js"
+    "start": "node ./api/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
