@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 node_modules
 be-dist
 dist
 .parcel-cache
 notas.txt
 .env
+=======
+node_modules
+>>>>>>> 374baf9fa4c65937d0ead1abbd5c2d7ae5eb6b20
