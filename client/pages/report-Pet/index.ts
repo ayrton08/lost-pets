@@ -14,10 +14,10 @@ class DoReport extends HTMLElement {
     <h3 class="title-report">Reportar mascota perdida</h3>
     <form-report-pet></form-report-pet>
     `;
-    if (location.pathname.includes("do-report")) {
-      const mapa = document.getElementById("map");
-      mapa["style"].display = "flex";
-    }
+    // if (location.pathname.includes("do-report")) {
+    //   const mapa = document.getElementById("map");
+    //   mapa["style"].display = "flex";
+    // }
   }
 }
 customElements.define("report-page", DoReport);
