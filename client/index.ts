@@ -4,7 +4,7 @@ import "./components/form.report-pet";
 import "./components/form.login";
 import "./pages/my-data";
 import "./pages/my-reports";
-import "./pages/report-pet";
+// import "./pages/report-pet";
 import "./pages/view-report-pet";
 import "./pages/register";
 import "./pages/login";
