@@ -2,6 +2,9 @@
   "name": "client",
   "version": "1.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "16.15.0"
+  },
   "scripts": {
     "dev:back": "nodemon --watch './api/index.ts' --exec ts-node ./api/index.ts",
     "dev:front": "parcel serve ./client/index.html",
