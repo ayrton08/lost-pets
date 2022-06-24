@@ -2,7 +2,7 @@ import { mainState } from "../../state";
 import { config } from "../../config";
 import { Router } from "@vaadin/router";
 // const API_BASE_URL = config.apiUrl me tira undefided la variable de ambiente
-const API_BASE_URL = "http://localhost:4000/api/v1";
+const API_BASE_URL = "http://localhost:3000/api/v1";
 class HomePage extends HTMLElement {
   connectedCallback() {
     this.render();
