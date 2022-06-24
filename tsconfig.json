@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "outDir": "api"
   },
-  "includes": ["./api/**/*.ts"]
+  "includes": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }
