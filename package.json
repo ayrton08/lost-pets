@@ -10,7 +10,7 @@
     "build:back": "tsc",
     "build:front": "parcel build ./client/index.html",
     "build": "npm run build:back && npm run build:front",
-    "start": "node ./dist/index.js"
+    "start": "node ./api/index.js"
   },
   "dependencies": {
     "@types/node": "^17.0.41",
