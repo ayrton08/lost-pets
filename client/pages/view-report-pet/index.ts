@@ -67,7 +67,7 @@ class ReportMapPage extends HTMLElement {
 
       const [lng, lat] = firstResult.geometry.coordinates;
       await fetch(
-        `http://localhost:3000/api/v1/pets/find-by-location?lat=${lat}&lng=${lng}`,
+        `https://dwf-m7-postgre.herokuapp.com/api/v1/pets/find-by-location?lat=${lat}&lng=${lng}`,
         {
           method: "get",
         }
