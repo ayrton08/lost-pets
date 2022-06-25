@@ -1,5 +1,6 @@
 import { mainState } from "../../state";
-import { Router } from "@vaadin/router";
+// import { Router } from "@vaadin/router";
+const Router = require("@vaadin/router");
 
 class Header extends HTMLElement {
   connectedCallback() {
