@@ -3,9 +3,9 @@
     "target": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "outDir": "api"
+    "outDir": "api",
+    "experimentalDecorators": true
   },
-
   "includes": ["api"],
   "exclude": ["client"]
 }
