@@ -11,7 +11,7 @@
     "dev:front": "parcel serve ./client/index.html",
     "dev": "nodemon ./api/index.ts",
     "sync:back": "ts-node ./api/models/sync.ts",
-    "build:back": "tsc",
+    "build:back": "tsc ./api/index.ts",
     "build:front": "parcel build ./client/index.html",
     "build": "npm run build:back && npm run build:front",
     "start": "node ./api/index.js"
