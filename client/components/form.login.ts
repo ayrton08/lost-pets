@@ -54,7 +54,6 @@ class FormLogin extends HTMLElement {
       const email = e.target["email"].value;
       const password = e.target["password"].value;
       const login = await mainState.login(email, password);
-      console.log(login);
 
       if (state.myData.login) {
         valid["style"].color = "green";

@@ -13,7 +13,7 @@ class ReportMapPage extends HTMLElement {
       <comp-header></comp-header>
     `;
 
-    const mapa = document.querySelector(".search-form");
+    const mapa = document.querySelector("#map");
     const body = document.querySelector("body");
 
     if (location.pathname.includes("view-report")) {

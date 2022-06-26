@@ -86,6 +86,9 @@ const mainState = {
         Authorization: `bearer ${token}`,
       },
     });
+    if(sendFormData.status === 401){
+      console.log("No estas logueado")
+    }
     const dataForm = await sendFormData.json();
     return dataForm;
   },
