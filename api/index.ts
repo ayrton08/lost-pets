@@ -2,7 +2,7 @@ import * as express from "express";
 import * as path from "path";
 import { routerApi } from "./routes";
 import * as cors from "cors";
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 const staticDir = path.resolve(__dirname, "../dist");
