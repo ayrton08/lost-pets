@@ -1,6 +1,5 @@
 import { config } from "./config";
 const API_BASE_URL = config.apiUrl;
-console.log("url", API_BASE_URL);
 
 const mainState = {
   data: {

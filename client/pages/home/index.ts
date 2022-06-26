@@ -1,8 +1,8 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
 import { Router } from "@vaadin/router";
-// const API_BASE_URL = config.apiUrl me tira undefided la variable de ambiente
-const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com/api/v1";
+const API_BASE_URL = config.apiUrl
+// const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com/api/v1";
 class HomePage extends HTMLElement {
   connectedCallback() {
     this.render();
