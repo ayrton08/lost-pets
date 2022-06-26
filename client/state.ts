@@ -1,5 +1,5 @@
 import { config } from "./config";
-const API_BASE_URL = config.apiUrl;;
+const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com";
 
 const mainState = {
   data: {
