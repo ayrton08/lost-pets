@@ -12,17 +12,16 @@ class HomePage extends HTMLElement {
     <comp-header></comp-header>
     <div class="content-home">
       <span class="title-welcome">Mascotas perdidas cerca tuyo</span>
-      <button class="see-map">See on map 🗺️</button>
       <div class="services-section-two"></div>
       <div class="form-info"><div>
     </div>
     
     `;
 
-    const goToMap = this.querySelector(".see-map");
-    goToMap.addEventListener("click", () => {
-      return Router.go("/view-reports");
-    });
+    // const goToMap = this.querySelector(".see-map");
+    // goToMap.addEventListener("click", () => {
+    //   return Router.go("/view-reports");
+    // });
 
     const state = mainState.getState();
     navigator.geolocation.getCurrentPosition((position) => {

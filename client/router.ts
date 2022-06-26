@@ -5,7 +5,7 @@ router.setRoutes([
   { path: "/home", component: "home-page" },
   { path: "/login", component: "login-page" },
   { path: "/register", component: "register-page" },
-  { path: "/view-reports", component: "report-map-page" },
+  // { path: "/view-reports", component: "report-map-page" },
   { path: "/my-data", component: "my-data-page" },
   { path: "/my-reports", component: "my-reports-page" },
   { path: "/do-report", component: "report-page" },

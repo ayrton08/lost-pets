@@ -25,7 +25,11 @@ router.post("/signin", async (req, res) => {
 router.get("/my-data", authController.authMiddleware, async (req, res) => {
   const { id } = req["_user"];
   const user = await User.findByPk(id);
-  res.json(user);
+  if (user) {
+    return res.json(user);
+  } else {
+    return res.status(401).json();
+  }
 });
 
 export default router;

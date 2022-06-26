@@ -1,5 +1,6 @@
 import { config } from "./config";
-const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com/api/v1";
+const API_BASE_URL = config.apiUrl;
+console.log("url", API_BASE_URL);
 
 const mainState = {
   data: {
@@ -86,9 +87,6 @@ const mainState = {
         Authorization: `bearer ${token}`,
       },
     });
-    if(sendFormData.status === 401){
-      console.log("No estas logueado")
-    }
     const dataForm = await sendFormData.json();
     return dataForm;
   },
