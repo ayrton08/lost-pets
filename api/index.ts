@@ -21,10 +21,11 @@ app.get("/test", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-routerApi(app);
-
 app.use(express.static("dist"));
 
+
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
+
+routerApi(app);
