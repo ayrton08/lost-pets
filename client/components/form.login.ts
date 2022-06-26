@@ -3,10 +3,6 @@ import { Router } from "@vaadin/router";
 import { mainState } from "../state";
 
 class FormLogin extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     this.render();
   }

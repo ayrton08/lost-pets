@@ -1,9 +1,5 @@
 export function infoPet() {
     class InfoPet extends HTMLElement {
-      constructor() {
-        super();
-      }
-  
       connectedCallback() {
         this.render();
       }
