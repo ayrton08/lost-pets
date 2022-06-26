@@ -16,7 +16,7 @@ class ReportMapPage extends HTMLElement {
     const mapa = document.querySelector("#map");
     const body = document.querySelector("body");
 
-    if (location.pathname.includes("view-report")) {
+    if (location.pathname.includes("view-reports")) {
       mapa["style"].display = "inherit";
       body["style"].backgroundColor = "#F8BBD0";
     }

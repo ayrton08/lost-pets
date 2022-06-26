@@ -40,12 +40,12 @@ class ReportPet extends HTMLElement {
 
     const body = document.querySelector("body");
     const searchMap = document.querySelector(".search-form");
-    const mapa = document.querySelector(".mapboxgl-map");
+    const mapa = document.querySelector("#map");
 
-    if (location.pathname.includes("do-report")) {
+    if (location.pathname === "do-report") {
       body["style"].backgroundColor = "#CFD8DC";
       searchMap["style"].display = "inherit";
-      mapa["style"].overflow = "inherit";
+      mapa["style"].display = "flex";
     }
     const state = mainState.getState();
 
@@ -71,10 +71,10 @@ class ReportPet extends HTMLElement {
       mainState.setState(state);
     });
     const buttonFind = this.shadowRoot.querySelector(".button-cancelar");
-    buttonFind.addEventListener("click",(e)=>{
-      e.preventDefault()
-      return Router.go("/home")
-    })
+    buttonFind.addEventListener("click", (e) => {
+      e.preventDefault();
+      return Router.go("/home");
+    });
     if (location.pathname === "/my-reports") {
       const buttonSave = this.shadowRoot.querySelector(".send-form");
       buttonSave.textContent = "Guardar 💾";
