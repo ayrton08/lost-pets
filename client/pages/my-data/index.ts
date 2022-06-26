@@ -1,7 +1,7 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
 import { Router } from "@vaadin/router";
-const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com/api/v1";
+const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com";
 
 class MyData extends HTMLElement {
   connectedCallback() {
