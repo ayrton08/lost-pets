@@ -15,9 +15,11 @@ class DoReport extends HTMLElement {
     <form-report-pet></form-report-pet>
     `;
     if (location.pathname.includes("do-report")) {
-      console.log("entre en el if")
+      console.log("entre en el if");
       const mapa = document.getElementById("map");
-      mapa["style"].visibility = "visible";
+      const search = document.querySelector(".search-form");
+      mapa["style"].display = "flex";
+      search["style"].display = "flex";
     }
   }
 }
