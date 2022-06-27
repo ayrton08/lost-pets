@@ -87,9 +87,6 @@ const mainState = {
       },
     });
     const dataForm = await sendFormData.json();
-    if (!dataForm.id) {
-      return console.error("No estas logueado");
-    }
     return dataForm;
   },
 
