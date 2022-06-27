@@ -9,7 +9,7 @@ class HomePage extends HTMLElement {
     this.innerHTML = `
     <comp-header></comp-header>
     <div class="content-home">
-      <span class="title-welcome">Mascotas perdidas cerca tuyo</span>
+      <span class="title-welcome">Lost pets near you</span>
       <div class="services-section-two"></div>
       <div class="form-info"><div>
     </div>
@@ -68,26 +68,26 @@ class HomePage extends HTMLElement {
         <form class="form-report">
             
             <span class="name-pet">${search.name}</span>
-            <span >Reportado el: <span class="time-report">${search.createdAt.slice(
+            <span >Reported at: <span class="time-report">${search.createdAt.slice(
               0,
               16
             )}</span></span>
 
             <img class="card-info-pic" src="${search.pictureURL}"></img>
             <label>
-              <span>Tu Nombre</span>
+              <span>Your Name</span>
               <input type="text" name="fullname" class="input-email" placeholder="Your Name" />
             </label>
             <label class="container-cellphone">
-              <span>Tu Telefono</span>
+              <span>Your Cellphone</span>
               <input type="text" name="cellphone" class="password-first" placeholder="Your Cellphone" />
             </label>
             <label class="textarea-last-place">
-                <span>¿Donde lo viste?</span>
+                <span>¿Where did you see?</span>
                 <textarea name="last-place" class="last-place"></textarea>
             </label>
             <br>
-            <button>Enviar</button>
+            <button>Send</button>
         </form>
         
       `;
@@ -104,7 +104,7 @@ class HomePage extends HTMLElement {
           const state = await mainState.sendInfoPet(data);
 
           formInfo.innerHTML = `
-          <div class="report-send">¡Reporte enviado con exito! ✅</div>
+          <div class="report-send">¡Report sent successfully! ✅</div>
           `;
         });
 

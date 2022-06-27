@@ -15,7 +15,7 @@ class MyReports extends HTMLElement {
     this.innerHTML = `
     <comp-header></comp-header>
     <div class="content-reports">
-      <span class="title-welcome">Mis Mascotas Reportadas</span>
+      <span class="title-welcome">My Report Pets</span>
       <div class="services-section-two"></div>
       <div class="form-update"><div>
     </div>

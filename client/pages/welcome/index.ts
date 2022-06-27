@@ -12,8 +12,8 @@ class WelcomePage extends HTMLElement {
     this.innerHTML = `
       <comp-header></comp-header>
       <div class="content">
-        <span class="title-main">¡Bienvenido!</span>
-        <span class="title-welcome">Para ver las mascotas reportadas cerca tuyo necesitamos permiso para conocer tu ubicación</span>
+        <span class="title-main">¡Welcome!</span>
+        <span class="title-welcome">To see the pets reported near you... we need permission to know your location</span>
         <button class="location">Give Location</button>
         <div class="buttons-intro"></div>
       </div>

@@ -1,16 +1,16 @@
 import { mainState } from "../../state";
 import { Router } from "@vaadin/router";
-// const Router = require("@vaadin/router");
 
 class Header extends HTMLElement {
   connectedCallback() {
     this.render();
   }
-  render() {
+  async render() {
     this.attachShadow({ mode: "open" });
     const div = document.createElement("header");
-    const stateLocal = localStorage.getItem("token");
-    if (!stateLocal) {
+    const stateLogin = await mainState.myData();
+
+    if (!stateLogin.id) {
       div.innerHTML = `
         <div class="container-header">
         <div class="izquierda">
@@ -72,24 +72,20 @@ class Header extends HTMLElement {
         <div class="menu-modal">
         <button class="modal-close">❌</button>
           
-          <span class="my-data">Mis Datos</span>
+          <span class="my-data">My Data</span>
           <hr>
-          <span class="my-reports">Mis Mascotas Reportadas</span>
+          <span class="my-reports">My Reports</span>
           <hr>
-          <span class="do-report">Reportar Mascota</span>
+          <span class="do-report">Report Pet</span>
           
           <div class="menu-footer">
-              <div class="name-user"></div>
-              <button class="close-session">Cerrar Seccion</button>
+              <div class="name-user">${stateLogin.fullname}</div>
+              <button class="close-session">Sign off</button>
           </div>
         </div>
       ${this.getStyles()}`;
       this.shadowRoot.appendChild(div);
 
-      const nameUser = this.shadowRoot.querySelector(".name-user");
-      // if (stateLocal.fullname) {
-      //   nameUser.textContent = `${stateLocal.fullname}`;
-      // }
       const goToHome = this.shadowRoot.querySelector(".logo");
       goToHome.addEventListener("click", () => {
         Router.go("/home");
@@ -223,7 +219,12 @@ class Header extends HTMLElement {
 
                 .logo{
                   cursor: pointer;
+                }
 
+                .name-user{
+                  font-size: 30px;
+                  color: violet;
+                  padding: 10px;
                 }
                </style>
                 `;

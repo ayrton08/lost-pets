@@ -15,7 +15,7 @@ class MyData extends HTMLElement {
     this.innerHTML = `
       <comp-header></comp-header>  
       <div class="content-data">
-        <span class="title-welcome">Mis Datos</span>
+        <span class="title-welcome">My Data</span>
       <form class="my-data-form">
         <label>
           <h3>Fullname</h3>
@@ -31,7 +31,7 @@ class MyData extends HTMLElement {
           <input type="password" name="password-repeat" class="password-second" placeholder="Repita la contraseña"/>
         </label>
   
-        <button class="save-data">Guardar</button>
+        <button class="save-data">Save</button>
         <div class="result-changes"><div>
         </form>
       </div>
@@ -55,7 +55,7 @@ class MyData extends HTMLElement {
         await mainState.updateDataUser(newFullname, password);
         return (result.textContent = "Cambios guardados ✅");
       } else {
-        alert("No hay cambios");
+        alert("Not changes");
       }
     });
   }

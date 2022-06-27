@@ -15,22 +15,22 @@ class ReportPet extends HTMLElement {
     div.innerHTML = `
         <form class="form-report">
             <label>
-              <h3 class="subtitle">Nombre</h3>
-              <input type="text" name="name" class="input-name" placeholder="Your Name" />
+              <h3 class="subtitle">Name</h3>
+              <input type="text" name="name" class="input-name" placeholder="Name" />
             </label>
             <label>
-              <h3 class="subtitle">Raza</h3>
-              <input type="text" name="raza" class="raza" placeholder="Raza" />
+              <h3 class="subtitle">Race</h3>
+              <input type="text" name="raza" class="raza" placeholder="Race" />
             </label>
               <div class="profile-picture-container">
-                <h3 class="subtitle">Arraste su foto aqui 📸</h3>
+                <h3 class="subtitle">Drag the photo here 📸</h3>
               </div>
               <span class="instructions-search">
-                Por defecto se reportara la ubicación en la que se encuentra, si desea indicar otra ubicacion en el reporte puede hacerlo en el mapa abajo.
+              By default the location where you are will be reported, if you wish to indicate another location in the report you can do so on the map below.
               </span>
-              <button class="send-form">Reportar como Perdido</button>
+              <button class="send-form">Report as Lost</button>
         </form>
-        <button class="button-cancelar">Cancelar</button>
+        <button class="button-cancelar">Cancel</button>
           ${this.getStyles()}`;
     this.shadowRoot.appendChild(div);
 
@@ -71,8 +71,8 @@ class ReportPet extends HTMLElement {
     });
     if (location.pathname === "/my-reports") {
       const buttonSave = this.shadowRoot.querySelector(".send-form");
-      buttonSave.textContent = "Guardar 💾";
-      buttonFind.textContent = "Reportar como encontrado";
+      buttonSave.textContent = "Save 💾";
+      buttonFind.textContent = "Report as found";
       buttonFind["style"].backgroundColor = "#5DADE2";
     }
     buttonFind.addEventListener("click", async (e) => {
@@ -110,7 +110,7 @@ class ReportPet extends HTMLElement {
       if (location.pathname === "/my-reports") {
         await mainState.updateReport(data, token, idPet);
         div.innerHTML = `
-          <div class="report-send">¡Reporte enviado con exito! ✅</div>
+          <div class="report-send">¡Report sent successfully! ✅</div>
           `;
         location.reload();
         return Router.go("/my-reports");
