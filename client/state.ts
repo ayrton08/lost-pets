@@ -172,6 +172,13 @@ const mainState = {
   subscribe(callback: (any) => any) {
     this.listeners.push(callback);
   },
+
+  hiddeMap() {
+    const mapa = document.getElementById("map");
+    const search = document.querySelector(".search-form");
+    mapa["style"].display = "none";
+    search["style"].display = "none";
+  },
 };
 
 export { mainState };

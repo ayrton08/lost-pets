@@ -18,6 +18,9 @@ class WelcomePage extends HTMLElement {
         <div class="buttons-intro"></div>
       </div>
       `;
+
+    mainState.hiddeMap();
+
     const locationEl = this.querySelector(".location");
     locationEl.addEventListener("click", () => {
       return Router.go("/home");

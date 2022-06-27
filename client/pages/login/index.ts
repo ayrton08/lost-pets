@@ -6,13 +6,14 @@ class LoginPage extends HTMLElement {
     this.render();
   }
   render() {
-    
     this.innerHTML = `
     <comp-header></comp-header>
     <div class="content-login">
     <form-login></form-login>
     </div>
     `;
+
+    mainState.hiddeMap();
   }
 }
 customElements.define("login-page", LoginPage);

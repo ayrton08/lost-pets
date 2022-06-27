@@ -22,6 +22,8 @@ class MyReports extends HTMLElement {
     
     `;
 
+    mainState.hiddeMap();
+
     getDataPets().then((data) => {
       for (const c of data) {
         addPetCard(c);

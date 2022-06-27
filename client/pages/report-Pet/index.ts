@@ -15,7 +15,6 @@ class DoReport extends HTMLElement {
     <form-report-pet></form-report-pet>
     `;
     if (location.pathname.includes("do-report")) {
-      console.log("entre en el if");
       const mapa = document.getElementById("map");
       const search = document.querySelector(".search-form");
       mapa["style"].display = "flex";

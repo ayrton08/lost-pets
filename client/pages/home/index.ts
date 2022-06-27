@@ -20,6 +20,7 @@ class HomePage extends HTMLElement {
     // goToMap.addEventListener("click", () => {
     //   return Router.go("/view-reports");
     // });
+    mainState.hiddeMap();
 
     const state = mainState.getState();
     navigator.geolocation.getCurrentPosition((position) => {

@@ -37,6 +37,7 @@ class MyData extends HTMLElement {
       </div>
       
       `;
+    mainState.hiddeMap();
 
     const saveData = document.querySelector(".my-data-form");
     saveData.addEventListener("submit", async (e) => {
