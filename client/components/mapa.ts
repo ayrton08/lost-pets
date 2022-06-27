@@ -48,20 +48,13 @@ export function map() {
   const map = initMap();
   initSearchForm(function (results) {
     const resultsSearch = results[1];
-    if (!resultsSearch) {
-      const firstResult = [
-        state.myData.location.lng,
-        state.myData.location.lat,
-      ];
-      const marker = new mapboxgl.Marker().setLngLat(firstResult).addTo(map);
-      map.setCenter(firstResult);
-      map.setZoom(16);
-    } else {
-      const marker = new mapboxgl.Marker()
-        .setLngLat(resultsSearch.geometry.coordinates)
-        .addTo(map);
-      map.setCenter(resultsSearch.geometry.coordinates);
-      map.setZoom(16);
-    }
+
+    state.myData.location.lng = resultsSearch.geometry.coordinates[0];
+    state.myData.location.lat = resultsSearch.geometry.coordinates[1];
+    const firstResult = [state.myData.location.lng, state.myData.location.lat];
+
+    const marker = new mapboxgl.Marker().setLngLat(firstResult).addTo(map);
+    map.setCenter(firstResult);
+    map.setZoom(16);
   });
 }

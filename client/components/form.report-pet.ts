@@ -4,10 +4,6 @@ import { map } from "./mapa";
 import { Router } from "@vaadin/router";
 
 class ReportPet extends HTMLElement {
-  constructor() {
-    super();
-  }
-
   connectedCallback() {
     this.render();
   }
@@ -48,10 +44,8 @@ class ReportPet extends HTMLElement {
       mapa["style"].display = "flex";
     }
     const state = mainState.getState();
-
     const token = localStorage.getItem("token");
     const idPet = state.reportId;
-
     const form = this.shadowRoot.querySelector(".form-report");
     const profile = this.shadowRoot.querySelector(".profile-picture-container");
     let imageDataURL;
@@ -86,6 +80,8 @@ class ReportPet extends HTMLElement {
       await mainState.updateReport({ state: false }, token, idPet);
       return;
     });
+
+    console.log("state", state);
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
