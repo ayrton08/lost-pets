@@ -1,7 +1,7 @@
-const mapboxgl = require("mapbox-gl");
 import MapboxClient from "mapbox";
-const MAPBOX_TOKEN =
-  "pk.eyJ1IjoiYXlydG9uMDgiLCJhIjoiY2wzeDZhZ2syMHk0NDNqbzJnbmxvazRiNCJ9.5zxk9KddYfSgjIPoEBz76A";
+import { config } from "../../config";
+const mapboxgl = require("mapbox-gl");
+const MAPBOX_TOKEN = config.mapboxToken;
 const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
 
 class ReportMapPage extends HTMLElement {
