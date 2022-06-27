@@ -76,19 +76,23 @@ router.patch(
 
 router.get("/by-id/:id", async (req, res) => {
   const { id } = req.params;
-  const pet = await Pets.findOne({
-    where: {
-      id: id,
-    },
-  });
-  const userId = pet["user_id"];
-  const user = await User.findByPk(userId);
-  const emailUser = user["dataValues"]["email"];
-  const rta = {
-    ...pet["dataValues"],
-    email: emailUser,
-  };
-  return res.json(rta);
+  try {
+    const pet = await Pets.findOne({
+      where: {
+        id: id,
+      },
+    });
+    const userId = pet["user_id"];
+    const user = await User.findByPk(userId);
+    const emailUser = user["dataValues"]["email"];
+    const rta = {
+      ...pet["dataValues"],
+      email: emailUser,
+    };
+    return res.json(rta);
+  } catch (error) {
+    return res.status(401).json("No se encontro la mascota");
+  }
 });
 
 export default router;

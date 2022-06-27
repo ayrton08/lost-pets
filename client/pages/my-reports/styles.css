@@ -17,6 +17,7 @@ body {
   align-items: center;
   gap: 20px;
   background-color: #2ecc71;
+  height: 2000px;
 }
 .name-pet-update {
   display: block;

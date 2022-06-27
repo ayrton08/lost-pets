@@ -80,6 +80,9 @@ const mainState = {
 
   async myData() {
     const token = localStorage.getItem("token");
+    if (!token) {
+      return console.error("No estas logueado");
+    }
     const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
       method: "GET",
       headers: {
