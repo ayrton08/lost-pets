@@ -1,6 +1,7 @@
 .search-form {
   background-color: coral;
   padding: 10px;
+  align-self: center;
 }
 
 body,
@@ -18,6 +19,7 @@ body {
 
 .mapa {
   margin: 50px;
+  align-self: center;
 }
 
 .mapboxgl-canvas {
@@ -25,14 +27,12 @@ body {
   border: solid 1px blueviolet;
 }
 
-
-
 .marker {
   display: block;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   padding: 0;
+}
 
 
-  }
