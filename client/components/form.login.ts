@@ -32,9 +32,9 @@ class FormLogin extends HTMLElement {
               `;
     this.shadowRoot.appendChild(div);
 
-    const state = mainState.getState();
     const stateLogin = await mainState.myData();
-    if (stateLogin.id) {
+    const state = mainState.getState();
+    if (state.myData.login) {
       state.myData.fullname = stateLogin.fullname;
       return Router.go("/home");
     }
