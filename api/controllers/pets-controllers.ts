@@ -30,7 +30,8 @@ export class PetsController {
     lat,
     lng,
     user_id,
-    pictureURL
+    pictureURL,
+    location
   ) {
     const algoliaRes = await index.saveObject({
       objectID: id,
@@ -43,6 +44,7 @@ export class PetsController {
       },
       user_id,
       pictureURL,
+      location,
     });
     return algoliaRes;
   }
@@ -54,6 +56,9 @@ export class PetsController {
     const rta: any = {};
     if (body.name) {
       rta.name = body.name;
+    }
+    if (body.location) {
+      rta.location = body.location;
     }
     if (!body.state) {
       rta.state = body.state;
@@ -82,6 +87,9 @@ export class PetsController {
     const rta: any = {};
     if (body.name) {
       rta.name = body.name;
+    }
+    if (body.location) {
+      rta.location = body.location;
     }
     if (!body.state) {
       rta.state = body.state;
@@ -118,6 +126,7 @@ export class PetsController {
         lat: updateData.lat,
         lng: updateData.lng,
         state: updateData.state,
+        location: updateData.location,
         user_id: updateData.UserId,
       };
 

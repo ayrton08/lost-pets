@@ -20,7 +20,7 @@ body {
   text-align: center;
   gap: 20px;
   background-color: #2ecc71;
-  height: 1500px;
+  min-height: 1500px;
 }
 
 .pets-card {
@@ -40,8 +40,11 @@ body {
 }
 
 .title {
-  font-size: 25px;
+  font-size: 20px;
   color: blue;
+}
+.title-location{
+  font-size: 15px;
 }
 
 .informacion {

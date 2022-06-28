@@ -39,7 +39,7 @@ router.post(
       const newPet = await petsController.reportLostPet(newPetData);
 
       const id = newPet["id"];
-      const { name, raza, state, lat, lng } = req.body;
+      const { name, raza, state, lat, lng, location } = req.body;
       const algolia = await petsController.updateReportAlgolia(
         id,
         name,
@@ -48,7 +48,8 @@ router.post(
         lat,
         lng,
         userId,
-        newPet["pictureURL"]
+        newPet["pictureURL"],
+        location
       );
       return res.json(newPet);
     } catch (error) {

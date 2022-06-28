@@ -9,6 +9,7 @@ export interface PetsData {
   lat: number;
   lng: number;
   state: string;
+  location: string;
   user_id: number;
 }
 
@@ -19,5 +20,6 @@ export const Pets = sequelize.define("pet", {
   lat: DataTypes.FLOAT,
   lng: DataTypes.FLOAT,
   state: DataTypes.STRING,
+  location: DataTypes.STRING,
   user_id: DataTypes.INTEGER,
 });

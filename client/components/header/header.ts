@@ -5,12 +5,14 @@ class Header extends HTMLElement {
   connectedCallback() {
     this.render();
   }
+
   async render() {
     this.attachShadow({ mode: "open" });
     const div = document.createElement("header");
-    const stateLogin = await mainState.myData();
+    const login = await mainState.myData();
+    const state = mainState.getState();
 
-    if (!stateLogin.id) {
+    if (!state.myData.login) {
       div.innerHTML = `
         <div class="container-header">
         <div class="izquierda">
@@ -79,7 +81,7 @@ class Header extends HTMLElement {
           <span class="do-report">Report Pet</span>
           
           <div class="menu-footer">
-              <div class="name-user">${stateLogin.fullname}</div>
+              <div class="name-user">${login.fullname}</div>
               <button class="close-session">Sign off</button>
           </div>
         </div>

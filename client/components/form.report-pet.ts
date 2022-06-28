@@ -11,6 +11,7 @@ class ReportPet extends HTMLElement {
   render() {
     this.attachShadow({ mode: "open" });
     const div = document.createElement("div");
+    const state = mainState.getState();
     div.className = "container-report";
     div.innerHTML = `
         <form class="form-report">
@@ -43,7 +44,6 @@ class ReportPet extends HTMLElement {
       searchMap["style"].display = "inherit";
       mapa["style"].display = "flex";
     }
-    const state = mainState.getState();
     const token = localStorage.getItem("token");
     const idPet = state.reportId;
     const form = this.shadowRoot.querySelector(".form-report");
@@ -81,7 +81,6 @@ class ReportPet extends HTMLElement {
       return;
     });
 
-    console.log("state", state);
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -94,6 +93,7 @@ class ReportPet extends HTMLElement {
         lat: state.myData.location.lat,
         lng: state.myData.location.lng,
         state: true,
+        location: state.locationReport
       };
 
       if (location.pathname === "/do-report") {

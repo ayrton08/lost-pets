@@ -51,6 +51,9 @@ class HomePage extends HTMLElement {
                 <span class="title-name">Raza:  <span class="title">${
                   params["raza"] || ""
                 }</span></span>
+                <span class="title-location">Location:  <span class="title">${
+                  params["location"] || ""
+                }</span></span>
                 <a id='${params["objectID"]}' class="editar">Reportar</a>
        `;
 

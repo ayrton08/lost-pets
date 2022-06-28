@@ -5,7 +5,7 @@ const mainState = {
   data: {
     myData: {
       login: false,
-      fullname: false,
+      fullname: "",
       token: "",
       password: "",
       email: "",
@@ -16,6 +16,7 @@ const mainState = {
     },
     reportId: "",
     reportUrl: "",
+    locationReport: "",
   },
   listeners: [],
 
@@ -80,14 +81,22 @@ const mainState = {
 
   async myData() {
     const token = localStorage.getItem("token");
-    const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
-      method: "GET",
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    });
-    const dataForm = await sendFormData.json();
-    return dataForm;
+    if (!token) {
+      return;
+    }
+    try {
+      const sendFormData = await fetch(`${API_BASE_URL}/auth/my-data`, {
+        method: "GET",
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      const dataForm = await sendFormData.json();
+      this.data.myData.login = true;
+      return dataForm;
+    } catch (error) {
+      return console.error(error);
+    }
   },
 
   logOut() {

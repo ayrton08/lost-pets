@@ -4,6 +4,7 @@ import { mainState } from "../state";
 const mapboxgl = require("mapbox-gl");
 const MAPBOX_TOKEN = config.mapboxToken;
 const mapboxClient = new MapboxClient(MAPBOX_TOKEN);
+const state = mainState.getState();
 
 function initMap() {
   mapboxgl.accessToken = MAPBOX_TOKEN;
@@ -25,11 +26,11 @@ function initMap() {
 
   return map;
 }
-
 function initSearchForm(callback) {
   const form = document.querySelector(".search-form");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    state.locationReport = e.target["q"].value;
     mapboxClient.geocodeForward(
       e.target["q"].value,
       {
@@ -43,7 +44,6 @@ function initSearchForm(callback) {
     );
   });
 }
-const state = mainState.getState();
 export function map() {
   const map = initMap();
   initSearchForm(function (results) {

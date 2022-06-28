@@ -1,15 +1,15 @@
 import { mainState } from "../../state";
 import { config } from "../../config";
 import { Router } from "@vaadin/router";
-// const API_BASE_URL = config.apiUrl me tira undefided la variable de ambiente
-const API_BASE_URL = "https://dwf-m7-postgre.herokuapp.com";
 class MyReports extends HTMLElement {
   connectedCallback() {
     this.render();
   }
   async render() {
-    const stateLogin = await mainState.myData();
-    if (!stateLogin.id) {
+    await mainState.myData();
+    const state = mainState.getState();
+
+    if (!state.myData.login) {
       return Router.go("/login");
     }
     this.innerHTML = `
@@ -44,6 +44,7 @@ class MyReports extends HTMLElement {
             <span class="title-name">Nombre: <span class="title-reports">${params["name"]}</span></span>
             <span class="title-name">Raza: <span class="title-reports">${params["raza"]} </span></span>
             <span class="title-name">Estado: <span class="status">${status} 🐶 </span></span>
+            <span class="title-name">Location: <span class="status">${params["location"]}</span></span>
             <a id='${params["id"]}' class="editar">Editar</a>
    `;
 

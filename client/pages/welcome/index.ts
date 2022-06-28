@@ -1,13 +1,10 @@
 import { Router } from "@vaadin/router";
 import { mainState } from "../../state";
 class WelcomePage extends HTMLElement {
-  constructor() {
-    super();
-  }
   connectedCallback() {
     this.render();
   }
-
+  
   async render() {
     this.innerHTML = `
       <comp-header></comp-header>
@@ -25,9 +22,11 @@ class WelcomePage extends HTMLElement {
     locationEl.addEventListener("click", () => {
       return Router.go("/home");
     });
-    const stateLogin = await mainState.myData();
 
-    if (!stateLogin.id) {
+    const login = await mainState.myData();
+    const state = mainState.getState();
+    
+    if (!state.myData.login) {
       const divButton = this.querySelector(".buttons-intro");
       divButton.innerHTML = `
         <button class="button-login" >Login</button>
