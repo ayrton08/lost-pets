@@ -24,7 +24,7 @@ body {
 }
 
 .pets-card {
-  max-width: 600px;
+  max-width: 350px;
   min-width: 300px;
   display: flex;
   flex-direction: column;

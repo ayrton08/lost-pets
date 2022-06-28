@@ -1,5 +1,6 @@
 import { Router } from "@vaadin/router";
 import { mainState } from "../../state";
+import "mapbox-gl/dist/mapbox-gl.css";
 class DoReport extends HTMLElement {
   connectedCallback() {
     this.render();

@@ -43,3 +43,8 @@ body {
 .search-form {
   align-content: center;
 }
+
+.form-update{
+  max-width: 500px;
+}
+
