@@ -4,19 +4,8 @@ import { routerApi } from "./routes";
 import * as cors from "cors";
 const port = process.env.PORT || 3000;
 const app = express();
+app.use(cors());
 const staticDir = path.resolve(__dirname, "../dist");
-
-const whitelist = "http";
-const options = {
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("no permitido"));
-    }
-  },
-};
-app.use(cors(options));
 
 app.use(
   express.json({
