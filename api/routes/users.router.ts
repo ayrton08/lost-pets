@@ -52,6 +52,7 @@ router.post("/info-pet", async (req, res) => {
   if (!req.body) {
     return res.status(401).json("Faltan datos en el reporte");
   }
+  console.log("body", req.body);
   const { emailOwner, title, message, cellphone, fullname } = req.body;
   const info = {
     message,

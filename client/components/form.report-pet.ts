@@ -48,6 +48,7 @@ class ReportPet extends HTMLElement {
     const idPet = state.reportId;
     const form = this.shadowRoot.querySelector(".form-report");
     const profile = this.shadowRoot.querySelector(".profile-picture-container");
+
     let imageDataURL;
 
     const myDropzone = new Dropzone(profile, {
@@ -58,6 +59,7 @@ class ReportPet extends HTMLElement {
     myDropzone.on("addedfile", function (file) {
       // usando este evento pueden acceder al dataURL directamente
       imageDataURL = file;
+      console.log("file", file);
     });
     navigator.geolocation.getCurrentPosition((position) => {
       state.myData.location.lat = position.coords.latitude;
@@ -81,7 +83,6 @@ class ReportPet extends HTMLElement {
       return;
     });
 
-
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = e.target["name"].value;
@@ -93,8 +94,9 @@ class ReportPet extends HTMLElement {
         lat: state.myData.location.lat,
         lng: state.myData.location.lng,
         state: true,
-        location: state.locationReport
+        location: state.locationReport,
       };
+      console.log("formulario", data);
 
       if (location.pathname === "/do-report") {
         const cancel = this.shadowRoot.querySelector(".button-cancelar");

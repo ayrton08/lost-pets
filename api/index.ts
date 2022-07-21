@@ -4,8 +4,22 @@ import { routerApi } from "./routes";
 import * as cors from "cors";
 const port = process.env.PORT || 3000;
 const app = express();
-app.use(cors());
 const staticDir = path.resolve(__dirname, "../dist");
+
+const whitelist = [
+  "http://localhost:1234",
+  "https://apx-dwf-m8.firebaseapp.com/",
+];
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("no permitido"));
+    }
+  },
+};
+app.use(cors(options));
 
 app.use(
   express.json({
@@ -24,7 +38,6 @@ app.get("/test", async (req, res) => {
 routerApi(app);
 
 app.use(express.static("dist"));
-
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));

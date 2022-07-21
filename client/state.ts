@@ -110,12 +110,12 @@ const mainState = {
     return localStorage.setItem("token", token);
   },
 
-  async doReport(dataForm: Object, UserId) {
+  async doReport(dataForm: Object, token) {
     const res = await fetch(`${API_BASE_URL}/pets/report-pet`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `bearer ${UserId}`,
+        Authorization: `bearer ${token}`,
       },
       body: JSON.stringify(dataForm),
     });

@@ -30,6 +30,7 @@ router.post(
   "/report-pet",
   authControllers.authMiddleware,
   async (req, res, next) => {
+    console.log(req.body);
     const userId = req["_user"].id;
     try {
       const newPetData = {
@@ -62,7 +63,10 @@ router.patch(
   "/update/:id",
   authControllers.authMiddleware,
   async (req, res) => {
+    console.log("res body", req.body);
+    console.log("res params", req.params);
     const { id } = req.params;
+    console.log("soy el id", id);
     const data = await petsController.bodyToUpdate(req.body.dataForm);
     const pet = await Pets.update(data, {
       where: {
