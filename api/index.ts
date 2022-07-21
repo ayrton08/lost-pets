@@ -6,10 +6,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const staticDir = path.resolve(__dirname, "../dist");
 
-const whitelist = [
-  "http://localhost:1234",
-  "https://apx-dwf-m8.firebaseapp.com/",
-];
+const whitelist = "https://apx-dwf-m8.firebaseapp.com/";
 const options = {
   origin: (origin, callback) => {
     if (whitelist.includes(origin) || !origin) {
